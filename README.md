@@ -80,11 +80,10 @@ Futurewise v2 is a full-stack, multi-agent, autonomous personal finance platform
 
 ### Run Locally:
 ```bash
-# Backend & Frontend (Port 8081)
-export PYTHONPATH=.
-v2/backend/.venv/bin/python3 -m v2.backend.main
+# Start from repository root using the standardized runner (Port 8081)
+./v2/run.sh
 ```
-Visit `http://localhost:8081` in your browser.
+Visit `http://localhost:8081` in your browser. The single source of truth for static frontend assets is located at `v2/frontend/static`.
 
 ### Cloud Deployment:
 Deployed to Google Cloud Run:

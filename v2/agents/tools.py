@@ -106,11 +106,48 @@ def calculate_debt_payoff_plans(uid: str, extra_monthly_payment: float = 100.0) 
 
 # --- NEWS SUB-AGENT (LIVE MACRO PULSE) ---
 def search_financial_news() -> Dict[str, Any]:
-    """Fetches real macro economic headlines or returns a grounded educational summary."""
-    return {
-        "headline": "Federal Reserve Holds Benchmark Rate Steady at 5.25%-5.50%",
-        "date": datetime.datetime.now(ZoneInfo("America/New_York")).strftime("%B %Y"),
-        "source": "Federal Reserve Monetary Policy & Consumer Finance Board",
-        "context": "Benchmark rates remain restrictive to ensure inflation stabilizes towards target 2%.",
-        "takeaway_for_user": "High-Yield Savings Accounts (HYSAs) remain advantageous (yielding 4-5% APY). Credit card variable APRs remain above 20%, so prioritize paying down credit card balances before investing in equities."
-    }
+    """Fetches real macro economic headlines using Google Search grounding on Gemini 2.5."""
+    try:
+        from google import genai
+        from google.genai import types
+
+        client = genai.Client(vertexai=True, project=PROJECT_ID, location="us-east1")
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents="Provide the top 2 current US macroeconomic/financial news headlines. Format: Headline, Source, Date, and a 1-sentence 'What it means for everyday budgets' takeaway.",
+            config=types.GenerateContentConfig(
+                tools=[types.Tool(google_search=types.GoogleSearch())]
+            )
+        )
+        if response and response.text:
+            return {
+                "headline": "Live Macroeconomic Pulse (Google Search Grounded)",
+                "date": datetime.datetime.now(ZoneInfo("America/New_York")).strftime("%B %d, %Y"),
+                "source": "Google Search Grounded via Gemini 2.5",
+                "context": response.text.strip(),
+                "takeaway_for_user": "Review liquid reserves and high-interest debt against current interest rate policy."
+            }
+        return {"headline": "News unavailable right now.", "context": "News unavailable right now."}
+    except Exception as e:
+        return {"headline": "News unavailable right now.", "context": f"News unavailable right now: {str(e)}"}
+
+# --- DETERMINISTIC FINANCIAL SANDBOX CALCULATIONS ---
+def run_financial_sandbox_calc(calc_type: str, params: Dict[str, Any]) -> Dict[str, Any]:
+    """Runs deterministic personal finance math for agent tools."""
+    if calc_type == "emergency_fund_runway":
+        cash = float(params.get("cash", 0.0))
+        monthly = float(params.get("monthly_expenses", 1.0))
+        runway = round(cash / max(1.0, monthly), 2)
+        return {"calc_type": calc_type, "runway_months": runway}
+    elif calc_type == "credit_utilization":
+        balance = float(params.get("balance", 0.0))
+        limit = float(params.get("limit", 1.0))
+        util = round((balance / max(1.0, limit)) * 100, 1)
+        return {"calc_type": calc_type, "utilization_percent": util, "recommended_under_30": util <= 30.0}
+    elif calc_type == "compound_interest":
+        principal = float(params.get("principal", 0.0))
+        rate = float(params.get("rate", 0.05))
+        years = int(params.get("years", 10))
+        future_val = round(principal * ((1.0 + rate) ** years), 2)
+        return {"calc_type": calc_type, "future_value": future_val}
+    return {"calc_type": calc_type, "error": f"Unknown calc_type '{calc_type}'"}

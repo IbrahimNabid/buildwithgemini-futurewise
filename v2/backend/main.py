@@ -3,6 +3,7 @@ import io
 import csv
 import json
 import uuid
+import asyncio
 import datetime
 from zoneinfo import ZoneInfo
 from typing import Optional, Dict, Any, List
@@ -326,10 +327,18 @@ def seed_demo_data(user: Dict[str, Any] = Depends(get_current_user)):
     for s in subs:
         user_ref.collection("subscriptions").add(s)
 
-    # 8. Goals & Debts
+    # 8. Goals & Debts (Dynamic Tax Limits from tax_limits collection)
+    ira_limit = 7500.00
+    try:
+        limit_doc = db.collection("tax_limits").document("2026").get()
+        if limit_doc.exists:
+            ira_limit = float(limit_doc.to_dict().get("ira_limit", 7500.00))
+    except Exception:
+        pass
+
     goals = [
         {"title": "3-Month Emergency Fund", "target_amount": 9000.00, "current_amount": 7500.00, "deadline": "2027-06-30"},
-        {"title": "Roth IRA Max-Out (2026)", "target_amount": 7000.00, "current_amount": 3500.00, "deadline": "2026-12-31"}
+        {"title": f"Roth IRA Max-Out (2026)", "target_amount": ira_limit, "current_amount": 3500.00, "deadline": "2026-12-31"}
     ]
     for g in goals:
         user_ref.collection("goals").add(g)
@@ -499,61 +508,81 @@ def get_game_report(user: Dict[str, Any] = Depends(get_current_user)):
     report = game_server.generate_1000_lives_report(state)
     return report
 
-# REAL AI ASSISTANT ENDPOINT (Milestone 6)
+# REAL AI ASSISTANT ENDPOINT (ADK In-Process Coordinator with Session State)
+from google.adk.runners import Runner
+from google.adk.sessions import InMemorySessionService
+from google.genai import types as genai_types
+from v2.agents.agent import coordinator_agent
+
+adk_session_service = InMemorySessionService()
+adk_runner = Runner(
+    agent=coordinator_agent,
+    session_service=adk_session_service,
+    app_name="futurewise_v2_coordinator"
+)
+
+# Persistent session ID mapping per user
+user_session_ids: Dict[str, str] = {}
+
 @app.post("/api/assistant/chat")
 async def assistant_chat(payload: Dict[str, Any], user: Dict[str, Any] = Depends(get_current_user)):
-    prompt = payload.get("prompt", "")
+    prompt = payload.get("prompt", "").strip()
     page = payload.get("page", "overview")
     uid = user["uid"]
 
+    if not prompt:
+        raise HTTPException(status_code=400, detail="Prompt cannot be empty.")
+
     try:
-        from v2.agents import tools
-        # Contextual assistance based on verified UID and deterministic tools
-        p_lower = prompt.lower()
-        if "trial" in p_lower or "cancel" in p_lower:
-            trials = tools.check_user_trials(uid)
-            critical = [t for t in trials if t.get("days_left", 99) <= 3]
-            if critical:
-                lines = [f"• **{t.get('service')}**: {t.get('days_left')} day(s) left. Cancel by {t.get('cancel_by_date')} to avoid ${t.get('cost_if_forgotten', 0.0):.2f} charge." for t in critical]
-                reply = f"**Trial Guard Alert**:\nYou have {len(critical)} trial(s) ending soon:\n\n" + "\n".join(lines) + "\n\nFor App Store trials, our conservative rule recommends canceling at least 2 days prior to prevent immediate renewal."
-            else:
-                reply = "All active free trials are within safe windows. No immediate cancellation needed today."
-
-        elif "budget" in p_lower or "spend" in p_lower or "cash" in p_lower:
-            b_data = tools.analyze_budget_and_cashflow(uid)
-            reply = (
-                f"**Cash-Flow & Budget Analysis**:\n"
-                f"• Safe to Spend This Week: **${b_data.get('safe_to_spend_this_week'):.2f}**\n"
-                f"• Budget Allocated: **${b_data.get('total_allocated'):.2f}** | Spent MTD: **${b_data.get('total_spent'):.2f}** ({b_data.get('budget_used_percent')}%\n"
-                f"• Checking Account Buffer: **${b_data.get('checking_balance'):.2f}**"
+        # Maintain one persistent session per user
+        session_id = user_session_ids.get(uid)
+        if not session_id:
+            new_session = await adk_session_service.create_session(
+                app_name="futurewise_v2_coordinator",
+                user_id=uid,
+                state={"uid": uid, "current_page": page}
             )
-
-        elif "debt" in p_lower or "avalanche" in p_lower or "snowball" in p_lower:
-            d_data = tools.calculate_debt_payoff_plans(uid, extra_monthly_payment=100.0)
-            aval = d_data.get("avalanche", {})
-            reply = (
-                f"**Debt Payoff Optimization**:\n"
-                f"• Total Debt Balance: **${d_data.get('total_debt'):.2f}**\n"
-                f"• **Debt Avalanche**: Debt-free in **{aval.get('months_to_debt_free')} months** (saves the most interest by targeting highest APR first).\n"
-                f"• Official federal student loan programs can be managed at [studentaid.gov](https://studentaid.gov)."
-            )
-
-        elif "news" in p_lower or "market" in p_lower or "fed" in p_lower:
-            news = tools.search_financial_news()
-            reply = (
-                f"**Macro Economic Pulse**:\n"
-                f"• **Headline**: {news.get('headline')}\n"
-                f"• **Context**: {news.get('context')}\n"
-                f"• **What it Means for You**: {news.get('takeaway_for_user')}"
-            )
+            session_id = new_session.id
+            user_session_ids[uid] = session_id
         else:
-            reply = (
-                f"Futurewise Coordinator ({page.capitalize()} page):\n"
-                "I am your autonomous personal finance co-pilot. I can calculate exact debt payoff timelines, monitor trial cancellation dates, review cash flow, and explain financial concepts."
-            )
+            # Update state for existing session
+            sess = await adk_session_service.get_session(app_name="futurewise_v2_coordinator", user_id=uid, session_id=session_id)
+            if sess:
+                sess.state["uid"] = uid
+                sess.state["current_page"] = page
 
-        return {"reply": reply, "page_context": page, "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat()}
+        user_msg = genai_types.Content(
+            role="user",
+            parts=[genai_types.Part.from_text(text=f"[Current UI Page: {page}]\nUser question: {prompt}")]
+        )
 
+        reply_parts = []
+        async def run_agent():
+            async for event in adk_runner.run_async(
+                session_id=session_id,
+                user_id=uid,
+                new_message=user_msg
+            ):
+                if event.content and event.content.parts:
+                    for p in event.content.parts:
+                        if p.text:
+                            reply_parts.append(p.text)
+
+        # 60s timeout enforcement
+        await asyncio.wait_for(run_agent(), timeout=60.0)
+        reply = "".join(reply_parts).strip()
+        if not reply:
+            reply = "I processed your request, but received no response text. Please try asking again."
+
+        return {
+            "reply": reply,
+            "page_context": page,
+            "session_id": session_id,
+            "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat()
+        }
+
+    except asyncio.TimeoutError:
+        raise HTTPException(status_code=504, detail="The AI Assistant timed out after 60 seconds. Please try again.")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Assistant service error: {str(e)}")
 
@@ -632,6 +661,13 @@ if os.path.exists(static_dir):
     @app.get("/")
     def index():
         return FileResponse(os.path.join(static_dir, "index.html"))
+
+    @app.get("/favicon.ico")
+    def favicon():
+        fav_path = os.path.join(static_dir, "favicon.svg")
+        if os.path.exists(fav_path):
+            return FileResponse(fav_path, media_type="image/svg+xml")
+        return Response(status_code=204)
 
 if __name__ == "__main__":
     import uvicorn

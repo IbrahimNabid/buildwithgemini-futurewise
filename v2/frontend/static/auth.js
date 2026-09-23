@@ -9,7 +9,7 @@ import {
   onAuthStateChanged, 
   signOut 
 } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-import { showToast, setTokenProvider } from "./utils.js";
+import { showToast, setTokenProvider } from "/static/utils.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBh1w82RAnyiSbdkPTJZLRGE7lEGbjl3Tc",

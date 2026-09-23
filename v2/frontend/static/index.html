@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Futurewise v2 — Autonomous Personal Finance</title>
+  <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
   <style>
     :root {
       --bg: #F5F7FA;
@@ -517,8 +518,8 @@
 
   <!-- MAIN APPLICATION LOGIC -->
   <script type="module">
-    import { api, escapeHtml, renderMarkdown, showToast, downloadFileWithAuth } from './utils.js';
-    import { initAuth, loginWithEmail, registerWithEmail, loginWithGoogle, logoutUser } from './auth.js';
+    import { api, escapeHtml, renderMarkdown, showToast, downloadFileWithAuth } from '/static/utils.js';
+    import { initAuth, loginWithEmail, registerWithEmail, loginWithGoogle, logoutUser } from '/static/auth.js';
 
     let currentPage = 'overview';
     let authMode = 'signin';
@@ -674,6 +675,14 @@
 
     document.getElementById('btn-send-drawer').onclick = sendAssistantMessage;
     document.getElementById('drawer-input').onkeydown = (e) => { if (e.key === 'Enter') sendAssistantMessage(); };
+
+    document.getElementById('drawer-messages').addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-action="retry-chat"]');
+      if (btn && btn.dataset.prompt) {
+        document.getElementById('drawer-input').value = btn.dataset.prompt;
+        sendAssistantMessage();
+      }
+    });
 
     // --- CONTENT AREA EVENT DELEGATION (No inline handlers!) ---
     const contentArea = document.getElementById('content-area');

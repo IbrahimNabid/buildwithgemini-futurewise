@@ -180,14 +180,14 @@ LESSONS: List[Dict[str, Any]] = [
     },
     {
         "id": "roth-vs-traditional-ira",
-        "category": "Workplace Benefits",
-        "title": "Roth IRA vs Traditional IRA (2026 Limit: $7,000)",
+        "category": "Retirement & Investing",
+        "title": "Roth IRA vs Traditional IRA (2026 Limit: $7,500)",
         "tax_year": 2026,
-        "why_it_matters": "In tax year 2026, IRA limit is $7,000 ($8,000 if age 50+). Roth IRAs are funded with after-tax money and grow 100% tax-free forever. Traditional IRAs offer upfront tax deduction.",
-        "common_mistake": "Thinking you can contribute $7,000 to Roth AND $7,000 to Traditional—the $7,000 limit is shared across all IRAs per year.",
+        "why_it_matters": "In tax year 2026, the IRA limit is $7,500 ($8,500 if age 50+). Roth IRAs are funded with after-tax money and grow 100% tax-free forever. Traditional IRAs offer upfront tax deduction.",
+        "common_mistake": "Thinking you can contribute $7,500 to Roth AND $7,500 to Traditional—the $7,500 limit is shared across all IRAs per year.",
         "what_to_do_next": "If you are early in your career or expect higher taxes later, open a Roth IRA at Fidelity, Vanguard, or Schwab and set up automatic monthly contributions.",
         "quiz": [
-            {"q": "What is the 2026 contribution limit for an IRA (under age 50)?", "options": ["$7,000", "$10,000", "$3,500"], "answer": 0},
+            {"q": "What is the 2026 contribution limit for an IRA (under age 50)?", "options": ["$7,500", "$10,000", "$3,500"], "answer": 0},
             {"q": "How is a Roth IRA taxed in retirement?", "options": ["Qualified withdrawals are 100% tax-free", "Taxed as regular income", "Taxed at 50%"], "answer": 0},
             {"q": "Can you withdraw original Roth IRA contributions (not earnings) penalty-free anytime?", "options": ["Yes, original direct contributions can be withdrawn anytime without tax or penalty", "No, locked until 59.5", "Only with a doctor note"], "answer": 0}
         ]
