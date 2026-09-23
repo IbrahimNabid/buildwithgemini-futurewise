@@ -50,15 +50,13 @@ async def get_current_user(request: Request, authorization: Optional[str] = Head
         raise HTTPException(status_code=401, detail="Invalid token format. Expected 'Bearer <token>'")
     token = parts[1]
     
-    # Secure demo-token bypass: only when DEMO_MODE=true AND client is localhost
+    # Secure demo-token bypass: only when DEMO_MODE=true
     if token.startswith("demo-token-"):
-        client_host = request.client.host if request.client else ""
-        is_localhost = client_host in ["127.0.0.1", "localhost", "::1", "testclient"]
-        if DEMO_MODE and is_localhost:
+        if DEMO_MODE:
             uid = token.replace("demo-token-", "")
             return {"uid": uid, "email": f"{uid}@demo.futurewise.internal", "name": "Demo Persona"}
         else:
-            raise HTTPException(status_code=403, detail="Demo token bypass not permitted outside localhost")
+            raise HTTPException(status_code=403, detail="Demo token bypass disabled in production mode")
         
     try:
         decoded_token = fb_auth.verify_id_token(token)

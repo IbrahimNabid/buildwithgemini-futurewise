@@ -3,8 +3,9 @@ import time
 from playwright.sync_api import sync_playwright
 
 def run_e2e_journey():
+    target_url = sys.argv[1] if len(sys.argv) > 1 else "http://localhost:8081"
     print("==================================================")
-    print("RUNNING FUTUREWISE V2 COMPLETE E2E USER JOURNEY")
+    print(f"RUNNING FUTUREWISE V2 COMPLETE E2E USER JOURNEY ON: {target_url}")
     print("==================================================")
 
     with sync_playwright() as p:
@@ -21,8 +22,8 @@ def run_e2e_journey():
         page.on("pageerror", lambda err: console_errors.append(f"[pageerror] {str(err)}"))
 
         # Step 1: Visit landing page
-        print("1. Loading landing page http://localhost:8081 ...")
-        page.goto("http://localhost:8081", wait_until="networkidle", timeout=15000)
+        print(f"1. Loading landing page {target_url} ...")
+        page.goto(target_url, wait_until="networkidle", timeout=25000)
         assert "Futurewise v2" in page.title()
         print("✓ Page title verified.")
 

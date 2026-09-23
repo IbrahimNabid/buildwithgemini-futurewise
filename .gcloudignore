@@ -1,0 +1,10 @@
+.git
+.gitignore
+.agents
+futurewise
+assets
+v2/backend/.venv
+v2/**/__pycache__
+v2/tests
+**/.DS_Store
+*.md
