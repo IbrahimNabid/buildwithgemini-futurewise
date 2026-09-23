@@ -15,9 +15,10 @@ import firebase_admin
 from firebase_admin import auth as fb_auth
 from google.cloud import firestore
 
-from . import autopilot
-from . import learn_library
-from . import game_engine
+try:
+    from . import autopilot, learn_library, game_engine
+except ImportError:
+    import autopilot, learn_library, game_engine
 
 PROJECT_ID = "qwiklabs-gcp-04-7459370ad109"
 if not firebase_admin._apps:
@@ -238,20 +239,18 @@ def seed_demo_data(user: Dict[str, Any] = Depends(get_current_user)):
 
     return {"status": "seeded", "message": "Demo persona Taylor Reynolds successfully populated."}
 
-# AUTOPILOT ENDPOINTS (Phase 3)
+# AUTOPILOT ENDPOINTS
 @app.post("/api/jobs/daily-scan")
 def run_daily_scan(user: Optional[Dict[str, Any]] = None):
-    """Can be triggered by Cloud Scheduler OIDC or authenticated user."""
     results = autopilot.run_all_users_autopilot()
     return {"status": "success", "users_scanned": len(results), "details": results}
 
 @app.post("/api/autopilot/run-now")
 def run_autopilot_now(user: Dict[str, Any] = Depends(get_current_user)):
-    """User-triggered Autopilot execution."""
     res = autopilot.run_autopilot_scan_for_user(user["uid"])
     return {"status": "success", "result": res}
 
-# LEARN LIBRARY ENDPOINTS (Phase 5)
+# LEARN LIBRARY ENDPOINTS
 @app.get("/api/learn/lessons")
 def get_learn_lessons(user: Dict[str, Any] = Depends(get_current_user)):
     return learn_library.get_all_lessons()
@@ -263,7 +262,7 @@ def get_single_lesson(lesson_id: str, user: Dict[str, Any] = Depends(get_current
         raise HTTPException(status_code=404, detail="Lesson not found")
     return lesson
 
-# LIFE MODE GAME ENDPOINTS (Phase 4)
+# LIFE MODE GAME ENDPOINTS
 @app.get("/api/game/chapters/{chapter_index}")
 def get_game_chapter(chapter_index: int, user: Dict[str, Any] = Depends(get_current_user)):
     ch = game_engine.get_chapter(chapter_index)
@@ -277,7 +276,6 @@ def calculate_game_report(payload: Dict[str, Any], user: Dict[str, Any] = Depend
     initial_stats = payload.get("initial_stats", {})
     report = game_engine.compute_end_report(timeline, initial_stats)
     
-    # Save to user's game_saves
     db.collection("users").document(user["uid"]).collection("game_saves").add({
         "completed_at": datetime.now(timezone.utc).isoformat(),
         "report": report
@@ -291,7 +289,6 @@ async def assistant_chat(payload: Dict[str, Any], user: Dict[str, Any] = Depends
     page = payload.get("page", "overview")
     uid = user["uid"]
     
-    # Run deterministic assistant response based on specialists
     prompt_lower = prompt.lower()
     if "trial" in prompt_lower or "cancel" in prompt_lower:
         trials = [t.to_dict() for t in db.collection("users").document(uid).collection("trials").stream()]
@@ -404,8 +401,11 @@ def delete_item(collection_name: str, item_id: str, user: Dict[str, Any] = Depen
     doc_ref.delete()
     return {"status": "deleted", "id": item_id}
 
-# Static file serving for Frontend (Phase 7)
+# Static file serving for Frontend
 static_dir = os.path.join(os.path.dirname(__file__), "../frontend/static")
+if not os.path.exists(static_dir):
+    static_dir = os.path.join(os.path.dirname(__file__), "static")
+
 if os.path.exists(static_dir):
     app.mount("/static", StaticFiles(directory=static_dir), name="static")
 
@@ -415,4 +415,5 @@ if os.path.exists(static_dir):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8081)
+    port = int(os.environ.get("PORT", 8080))
+    uvicorn.run(app, host="0.0.0.0", port=port)
