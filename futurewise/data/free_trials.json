@@ -1,0 +1,76 @@
+[
+  {
+    "id": "trial_calm_app_store",
+    "service_name": "Calm - Sleep & Meditation",
+    "platform": "App Store",
+    "category": "Health & Wellness",
+    "start_date": "2026-09-10",
+    "trial_end_date": "2026-09-24",
+    "days_remaining": 2,
+    "price_after_trial": "$69.99/year",
+    "annualized_cost": 69.99,
+    "billing_frequency": "annual",
+    "cancellation_policy": {
+      "cancel_window": "At least 24 hours before expiration (Apple requirement)",
+      "access_after_cancellation": "Keeps access until trial expiration date (2026-09-24)",
+      "urgency_badge": "Action Required: Ends in 2 Days"
+    },
+    "recommended_action": "Cancel now to prevent auto-renewal charge of $69.99. Access remains active until Sept 24.",
+    "cancellation_steps": [
+      "Open Settings on your iPhone/iPad",
+      "Tap your Name / Apple ID banner at the top",
+      "Tap 'Subscriptions'",
+      "Select 'Calm'",
+      "Tap 'Cancel Free Trial' and confirm"
+    ]
+  },
+  {
+    "id": "trial_duolingo_google_play",
+    "service_name": "Duolingo Super",
+    "platform": "Google Play",
+    "category": "Education",
+    "start_date": "2026-09-13",
+    "trial_end_date": "2026-09-27",
+    "days_remaining": 5,
+    "price_after_trial": "$12.99/month",
+    "annualized_cost": 155.88,
+    "billing_frequency": "monthly",
+    "cancellation_policy": {
+      "cancel_window": "Anytime before renewal date",
+      "access_after_cancellation": "Keeps full Super access until trial ends on Sept 27",
+      "urgency_badge": "Review: Ends in 5 Days"
+    },
+    "recommended_action": "Decide whether to keep or cancel. If canceling, do so before Sept 26 to avoid monthly recurring $12.99.",
+    "cancellation_steps": [
+      "Open Google Play Store app",
+      "Tap your profile icon in top right",
+      "Tap 'Payments & subscriptions' -> 'Subscriptions'",
+      "Tap 'Duolingo'",
+      "Tap 'Cancel subscription' and follow prompts"
+    ]
+  },
+  {
+    "id": "trial_wsj_direct_website",
+    "service_name": "The Wall Street Journal Digital",
+    "platform": "Website",
+    "category": "News & Media",
+    "start_date": "2026-09-04",
+    "trial_end_date": "2026-10-04",
+    "days_remaining": 12,
+    "price_after_trial": "$4.00/month for 1st year, then $38.99/month",
+    "annualized_cost": 48.0,
+    "billing_frequency": "monthly",
+    "cancellation_policy": {
+      "cancel_window": "At least 48 hours prior to billing cycle end date",
+      "access_after_cancellation": "May vary; online cancellation or live chat during business hours",
+      "urgency_badge": "Upcoming: Ends in 12 Days"
+    },
+    "recommended_action": "Mark calendar for Oct 2 (2 days before trial ends). Cancel online at customer.wsj.com to avoid step-up billing.",
+    "cancellation_steps": [
+      "Sign in to customer.wsj.com",
+      "Navigate to 'Customer Center' -> 'Manage My Subscription'",
+      "Click 'Cancel Subscription' or initiate Online Live Chat",
+      "Save cancellation confirmation number"
+    ]
+  }
+]

@@ -1,0 +1,533 @@
+[
+  {
+    "id": "evt_001_rent_hike",
+    "title": "The NYC Lease Renewal Hike",
+    "category": "Housing",
+    "chapter": 1,
+    "prompt": "Your Brooklyn landlord sends your lease renewal with a $200/month increase (from $1,850 to $2,050). You have 30 days to respond.",
+    "options": [
+      {
+        "option_id": "A",
+        "label": "Absorb the increase and renew",
+        "description": "Stay in your familiar apartment. Avoid moving friction and moving costs.",
+        "financial_effects": {
+          "immediate_cost": 0,
+          "monthly_cash_flow_delta": -200.0,
+          "annual_impact": -2400.0,
+          "stability_impact": "Reduces monthly savings capacity by 10% unless discretionary dining/shopping is trimmed."
+        }
+      },
+      {
+        "option_id": "B",
+        "label": "Negotiate for a 2-year lease at +$75/month",
+        "description": "Counter-offer a modest $75/month increase in exchange for signing a guaranteed 24-month lease.",
+        "financial_effects": {
+          "immediate_cost": 0,
+          "monthly_cash_flow_delta": -75.0,
+          "annual_impact": -900.0,
+          "stability_impact": "Saves $1,500/year compared to landlord's initial ask and locks in housing predictability."
+        }
+      },
+      {
+        "option_id": "C",
+        "label": "Move to Queens with a roommate ($1,400/mo share)",
+        "description": "Incur one-time moving costs ($1,100 for U-Haul, movers, security deposit shift), but drop rent to $1,400.",
+        "financial_effects": {
+          "immediate_cost": -1100.0,
+          "monthly_cash_flow_delta": 450.0,
+          "annual_impact": 4300.0,
+          "stability_impact": "Upfront hit to emergency fund, but frees up $5,400/year to accelerate retirement and emergency savings."
+        }
+      }
+    ]
+  },
+  {
+    "id": "evt_002_job_offer_crossroads",
+    "title": "Career Fork: Series B Startup vs. Corporate Firm",
+    "category": "Career",
+    "chapter": 1,
+    "prompt": "You receive two job offers. A fast-growing fintech startup offers $82k base + stock options with high deductible health plans. A stable enterprise offers $74k base + 6% 401(k) match and comprehensive medical/HSA benefits.",
+    "options": [
+      {
+        "option_id": "A",
+        "label": "Take the Series B Startup ($82k base + options)",
+        "description": "Maximize immediate cash salary and potential equity upside. Less generous health/retirement match.",
+        "financial_effects": {
+          "immediate_cost": 0,
+          "monthly_cash_flow_delta": 750.0,
+          "annual_impact": 9000.0,
+          "stability_impact": "Higher gross cash flow, but requires self-disciplined retirement investing without an employer match."
+        }
+      },
+      {
+        "option_id": "B",
+        "label": "Take the Enterprise ($74k base + 6% 401(k) match + HSA seed)",
+        "description": "Guaranteed $4,440/yr employer match, lower health insurance premiums, and $1,000 employer HSA contribution.",
+        "financial_effects": {
+          "immediate_cost": 1000.0,
+          "monthly_cash_flow_delta": 480.0,
+          "annual_impact": 9880.0,
+          "stability_impact": "Total compensation equals startup once match ($4,440) and HSA ($1,000) are factored in, with higher stability."
+        }
+      }
+    ]
+  },
+  {
+    "id": "evt_003_unexpected_er_visit",
+    "title": "Emergency Room Sprained Ankle & CT Scan",
+    "category": "Health",
+    "chapter": 2,
+    "prompt": "A bad slip while running leads to an emergency room visit, X-rays, and an ankle boot. You receive an explanation of benefits: your bill is $1,850 before your HDHP deductible is reached.",
+    "options": [
+      {
+        "option_id": "A",
+        "label": "Pay in full from emergency savings",
+        "description": "Wipe out $1,850 of your cash cushion immediately to avoid dealing with billing administrators.",
+        "financial_effects": {
+          "immediate_cost": -1850.0,
+          "monthly_cash_flow_delta": 0,
+          "annual_impact": -1850.0,
+          "stability_impact": "Drains emergency savings runway by ~1 month, leaving you vulnerable to secondary shocks."
+        }
+      },
+      {
+        "option_id": "B",
+        "label": "Request itemized bill and 0% 12-month payment plan",
+        "description": "Request itemized billing to drop erroneous charges, then establish a 0% interest payment plan ($135/mo for 12 mos).",
+        "financial_effects": {
+          "immediate_cost": -230.0,
+          "monthly_cash_flow_delta": -135.0,
+          "annual_impact": -1620.0,
+          "stability_impact": "Keeps cash buffer liquid; itemization typically shaves $200-$300 off hospital facility fees."
+        }
+      },
+      {
+        "option_id": "C",
+        "label": "Pay using accumulated triple-tax-advantaged HSA funds",
+        "description": "Use pre-tax dollars saved in your HSA. Reimburses the bill with 100% tax-free dollars.",
+        "financial_effects": {
+          "immediate_cost": 0,
+          "monthly_cash_flow_delta": 0,
+          "annual_impact": -1850.0,
+          "stability_impact": "Saves ~$550 in effective federal/state/FICA taxes compared to paying out of post-tax checking."
+        }
+      }
+    ]
+  },
+  {
+    "id": "evt_004_work_laptop_failure",
+    "title": "Freelance Work Laptop Dies",
+    "category": "Emergency",
+    "chapter": 2,
+    "prompt": "Your primary laptop for side-gig design contracts suffers liquid damage. You need a replacement to fulfill $1,200/month of ongoing freelance design work.",
+    "options": [
+      {
+        "option_id": "A",
+        "label": "Buy top-tier new M3 Pro MacBook on 24.99% Store Card ($2,400)",
+        "description": "Financed on a retail credit card with minimum payments.",
+        "financial_effects": {
+          "immediate_cost": 0,
+          "monthly_cash_flow_delta": -120.0,
+          "annual_impact": -2900.0,
+          "stability_impact": "Dangerous high-interest debt trap; accrues over $500 in interest over 18 months."
+        }
+      },
+      {
+        "option_id": "B",
+        "label": "Buy certified refurbished MacBook ($1,150) in cash",
+        "description": "Purchase Apple Certified Refurbished with 1-year warranty using emergency cash reserve.",
+        "financial_effects": {
+          "immediate_cost": -1150.0,
+          "monthly_cash_flow_delta": 0,
+          "annual_impact": -1150.0,
+          "stability_impact": "Temporary cash dip quickly recouped by ongoing $1,200/mo freelance revenue with zero debt interest."
+        }
+      }
+    ]
+  },
+  {
+    "id": "evt_005_destination_wedding",
+    "title": "Best Friend's Destination Wedding in Italy",
+    "category": "Lifestyle",
+    "chapter": 2,
+    "prompt": "Your college roommate invites you to their wedding on Lake Como. Flights, lodging, attire, and gifts will run approximately $2,200.",
+    "options": [
+      {
+        "option_id": "A",
+        "label": "Attend full week vacation ($2,200 charged to credit card)",
+        "description": "Carried over 6 months at 21% APR.",
+        "financial_effects": {
+          "immediate_cost": 0,
+          "monthly_cash_flow_delta": -390.0,
+          "annual_impact": -2450.0,
+          "stability_impact": "Significant social reward, but costs an extra $250 in interest and drains cash flow."
+        }
+      },
+      {
+        "option_id": "B",
+        "label": "Attend weekend only, book flight points + budget hostel ($1,050 cash)",
+        "description": "Use travel credit card points, stay in a shared Airbnb with mutual friends, pay cash.",
+        "financial_effects": {
+          "immediate_cost": -1050.0,
+          "monthly_cash_flow_delta": 0,
+          "annual_impact": -1050.0,
+          "stability_impact": "Maintains social connection while halving total out-of-pocket spend; zero debt burden."
+        }
+      },
+      {
+        "option_id": "C",
+        "label": "Politely decline in-person, send thoughtful $150 gift",
+        "description": "Prioritize financial foundation and emergency fund buildout.",
+        "financial_effects": {
+          "immediate_cost": -150.0,
+          "monthly_cash_flow_delta": 0,
+          "annual_impact": -150.0,
+          "stability_impact": "Preserves over $2,000 for emergency savings, but with some social FOMO."
+        }
+      }
+    ]
+  },
+  {
+    "id": "evt_006_401k_match_enrollment",
+    "title": "Company 401(k) Auto-Enrollment Window",
+    "category": "Retirement",
+    "chapter": 3,
+    "prompt": "Your employer auto-enrolls you at 3% contribution. Their policy offers a 100% match up to 5% of salary ($3,400/yr free match on your $68k salary).",
+    "options": [
+      {
+        "option_id": "A",
+        "label": "Leave at default 3% ($170/mo from paycheck)",
+        "description": "Captures $2,040 of match, leaving $1,360/year of employer match unclaimed.",
+        "financial_effects": {
+          "immediate_cost": 0,
+          "monthly_cash_flow_delta": -125.0,
+          "annual_impact": 4080.0,
+          "stability_impact": "Positive retirement start, but sacrifices $1,360/year of guaranteed 100% employer return."
+        }
+      },
+      {
+        "option_id": "B",
+        "label": "Increase to 5% to capture 100% of employer match ($283/mo)",
+        "description": "Take full advantage of the 5% match. Paycheck drops by ~$205/mo after federal/state tax savings.",
+        "financial_effects": {
+          "immediate_cost": 0,
+          "monthly_cash_flow_delta": -205.0,
+          "annual_impact": 6800.0,
+          "stability_impact": "Maximizes guaranteed 100% immediate return on match; builds $6,800/yr in tax-advantaged wealth."
+        }
+      },
+      {
+        "option_id": "C",
+        "label": "Opt out completely to maximize take-home pay",
+        "description": "Receive extra $125/mo in paycheck, but forfeit $3,400/yr of free money.",
+        "financial_effects": {
+          "immediate_cost": 0,
+          "monthly_cash_flow_delta": 125.0,
+          "annual_impact": -3400.0,
+          "stability_impact": "Severe long-term opportunity loss; forfeit hundreds of thousands in 30-year compound growth."
+        }
+      }
+    ]
+  },
+  {
+    "id": "evt_007_tax_refund_windfall",
+    "title": "Surprise $2,800 Tax Refund & Bonus",
+    "category": "Windfall",
+    "chapter": 3,
+    "prompt": "You file your taxes and receive a combined federal and NY state tax refund plus a performance spot bonus totaling $2,800.",
+    "options": [
+      {
+        "option_id": "A",
+        "label": "Deposit 100% into High-Yield Savings Account (HYSA)",
+        "description": "Boost emergency fund from $3,200 to $6,000, achieving a full 3 months of basic NYC expenses.",
+        "financial_effects": {
+          "immediate_cost": 2800.0,
+          "monthly_cash_flow_delta": 10.5,
+          "annual_impact": 2925.0,
+          "stability_impact": "Major leap in financial stability; unlocks true baseline peace of mind."
+        }
+      },
+      {
+        "option_id": "B",
+        "label": "Split: $1,400 to HYSA emergency fund, $1,400 to Roth IRA index fund",
+        "description": "Strengthen cash buffer while seeding long-term tax-free compound growth.",
+        "financial_effects": {
+          "immediate_cost": 2800.0,
+          "monthly_cash_flow_delta": 5.0,
+          "annual_impact": 2940.0,
+          "stability_impact": "Balanced approach advancing both short-term security and multi-decade wealth."
+        }
+      },
+      {
+        "option_id": "C",
+        "label": "Upgrade wardrobe & take weekend trip to Montauk ($2,800)",
+        "description": "Spend windfall entirely on lifestyle upgrades.",
+        "financial_effects": {
+          "immediate_cost": 0,
+          "monthly_cash_flow_delta": 0,
+          "annual_impact": 0,
+          "stability_impact": "Zero financial resilience gained; emergency fund remains dangerously lean."
+        }
+      }
+    ]
+  },
+  {
+    "id": "evt_008_credit_card_debt_consolidation",
+    "title": "Credit Card Balance & 0% Balance Transfer Offer",
+    "category": "Debt",
+    "chapter": 3,
+    "prompt": "You have a lingering $3,500 credit card balance carrying 24.99% APR, costing you ~$73/month in pure interest. You receive an offer for a 0% APR balance transfer for 15 months (3% transfer fee).",
+    "options": [
+      {
+        "option_id": "A",
+        "label": "Accept 0% balance transfer and pay $240/month",
+        "description": "Pay $105 one-time transfer fee, then pay $240/mo to be completely debt-free in 15 months.",
+        "financial_effects": {
+          "immediate_cost": -105.0,
+          "monthly_cash_flow_delta": -240.0,
+          "annual_impact": 880.0,
+          "stability_impact": "Saves ~$980 in predatory interest charges; boosts credit score as utilization drops to zero."
+        }
+      },
+      {
+        "option_id": "B",
+        "label": "Continue paying minimum payment (~$90/month) at 24.99%",
+        "description": "Make minimal dent in principal while paying majority to interest.",
+        "financial_effects": {
+          "immediate_cost": 0,
+          "monthly_cash_flow_delta": -90.0,
+          "annual_impact": -875.0,
+          "stability_impact": "Takes over 5 years to clear, costing more than $2,100 in cumulative interest."
+        }
+      }
+    ]
+  },
+  {
+    "id": "evt_009_side_hustle_launch",
+    "title": "Freelance Brand Consulting Opportunity",
+    "category": "Career",
+    "chapter": 4,
+    "prompt": "A boutique marketing agency in Manhattan offers you an ongoing monthly retainer for 12 hours of weekend design work at $75/hour ($900/month gross).",
+    "options": [
+      {
+        "option_id": "A",
+        "label": "Accept retainer and allocate 30% to quarterly estimated taxes",
+        "description": "Earn $900/mo gross, save $270 for taxes, netting $630/mo pure additional cash flow.",
+        "financial_effects": {
+          "immediate_cost": 0,
+          "monthly_cash_flow_delta": 630.0,
+          "annual_impact": 7560.0,
+          "stability_impact": "Expands monthly savings rate by over 15%, greatly accelerating emergency fund and IRA targets."
+        }
+      },
+      {
+        "option_id": "B",
+        "label": "Decline to protect weekend work-life balance and mental health",
+        "description": "Focus 100% on primary career advancement and skill-building.",
+        "financial_effects": {
+          "immediate_cost": 0,
+          "monthly_cash_flow_delta": 0,
+          "annual_impact": 0,
+          "stability_impact": "Preserves personal time and prevents burnout, but cash flow remains tightly bound to day job."
+        }
+      }
+    ]
+  },
+  {
+    "id": "evt_010_hsa_open_enrollment",
+    "title": "Benefits Open Enrollment: PPO vs. HDHP + HSA",
+    "category": "Health",
+    "chapter": 4,
+    "prompt": "It's November open enrollment. You are healthy and visit the doctor 1-2 times a year. Plan A: PPO ($180/mo premium, $500 deductible). Plan B: HDHP ($75/mo premium, $1,650 deductible, employer contributes $600 to your HSA).",
+    "options": [
+      {
+        "option_id": "A",
+        "label": "Choose HDHP + HSA and contribute $150/month pre-tax",
+        "description": "Save $105/mo in payroll premiums, gain $600 free employer seed, and save ~$55/mo in taxes on HSA contributions.",
+        "financial_effects": {
+          "immediate_cost": 600.0,
+          "monthly_cash_flow_delta": -45.0,
+          "annual_impact": 2520.0,
+          "stability_impact": "Leverages the triple-tax advantage (pre-tax, tax-free growth, tax-free withdrawal for medical); builds healthcare nest egg."
+        }
+      },
+      {
+        "option_id": "B",
+        "label": "Stick with traditional PPO for perceived peace of mind",
+        "description": "Pay $180/mo payroll deduction ($2,160/year) with no HSA vehicle.",
+        "financial_effects": {
+          "immediate_cost": 0,
+          "monthly_cash_flow_delta": -180.0,
+          "annual_impact": -2160.0,
+          "stability_impact": "Guarantees lower co-pays, but wastes ~$1,800/yr in higher premiums and forfeited employer HSA seed."
+        }
+      }
+    ]
+  },
+  {
+    "id": "evt_011_market_dip_volatility",
+    "title": "Stock Market Pullback: S&P 500 Dips 18%",
+    "category": "Economy",
+    "chapter": 4,
+    "prompt": "Inflation concerns and interest rate volatility trigger a headline-dominating 18% market correction over 3 weeks. Your 401(k) and IRA show red balances.",
+    "options": [
+      {
+        "option_id": "A",
+        "label": "Panic sell index fund holdings to cash to 'stop the bleeding'",
+        "description": "Convert paper losses into permanent realized losses.",
+        "financial_effects": {
+          "immediate_cost": 0,
+          "monthly_cash_flow_delta": 0,
+          "annual_impact": -1800.0,
+          "stability_impact": "Locks in losses at market bottom; misses subsequent historical recoveries."
+        }
+      },
+      {
+        "option_id": "B",
+        "label": "Stay the course and maintain automatic monthly dollar-cost averaging",
+        "description": "Do not alter your automated contributions. Buy index shares at an 18% discount.",
+        "financial_effects": {
+          "immediate_cost": 0,
+          "monthly_cash_flow_delta": 0,
+          "annual_impact": 0,
+          "stability_impact": "Classic evidence-based index investing practice; historically yields strong long-term upside."
+        }
+      },
+      {
+        "option_id": "C",
+        "label": "Trim $100 from monthly dining out to buy extra index fund shares",
+        "description": "Opportunistically buy low during market distress.",
+        "financial_effects": {
+          "immediate_cost": 0,
+          "monthly_cash_flow_delta": -100.0,
+          "annual_impact": 1200.0,
+          "stability_impact": "Boosts long-term wealth accumulation by acquiring undervalued equities with zero leverage."
+        }
+      }
+    ]
+  },
+  {
+    "id": "evt_012_dental_crown_emergency",
+    "title": "Unexpected Dental Crown",
+    "category": "Health",
+    "chapter": 5,
+    "prompt": "A fractured molar requires a porcelain crown. Basic dental insurance covers 50%, leaving you with an out-of-pocket patient balance of $850.",
+    "options": [
+      {
+        "option_id": "A",
+        "label": "Pay with HSA debit card",
+        "description": "Use pre-tax HSA funds accumulated earlier.",
+        "financial_effects": {
+          "immediate_cost": -850.0,
+          "monthly_cash_flow_delta": 0,
+          "annual_impact": -850.0,
+          "stability_impact": "Zero impact on checking account or credit score; saves ~30% in effective income tax."
+        }
+      },
+      {
+        "option_id": "B",
+        "label": "Ask dental office for 5% cash discount, pay from checking",
+        "description": "Most private dentists give 5-10% discount for cash/debit settlement in full ($780).",
+        "financial_effects": {
+          "immediate_cost": -780.0,
+          "monthly_cash_flow_delta": 0,
+          "annual_impact": -780.0,
+          "stability_impact": "Mild hit to emergency fund, but captures instant $70 discount."
+        }
+      }
+    ]
+  },
+  {
+    "id": "evt_013_subscription_audit",
+    "title": "Trial Guard Subscription Audit",
+    "category": "Budgeting",
+    "chapter": 5,
+    "prompt": "Futurewise flags 4 lingering subscriptions and forgotten auto-renewals (streaming services, premium apps, news tiers) totaling $78/month.",
+    "options": [
+      {
+        "option_id": "A",
+        "label": "Audit and cancel unused subscriptions immediately",
+        "description": "Cancel 3 unused subscriptions, retaining only 1 core favorite. Saves $62/month.",
+        "financial_effects": {
+          "immediate_cost": 0,
+          "monthly_cash_flow_delta": 62.0,
+          "annual_impact": 744.0,
+          "stability_impact": "Recovers $744/year with zero change in quality of life; automatically redirected to savings."
+        }
+      },
+      {
+        "option_id": "B",
+        "label": "Postpone decision ('I might watch that show next month')",
+        "description": "Keep all subscriptions active.",
+        "financial_effects": {
+          "immediate_cost": 0,
+          "monthly_cash_flow_delta": 0,
+          "annual_impact": -744.0,
+          "stability_impact": "Quiet cash drain that bleeds over $700 annually on unused digital services."
+        }
+      }
+    ]
+  },
+  {
+    "id": "evt_014_roommate_moving_out",
+    "title": "Roommate Announces Sudden Relocation",
+    "category": "Housing",
+    "chapter": 5,
+    "prompt": "Your roommate gives 30 days notice that they are moving to Los Angeles. You either need to find a vetted replacement or cover their $1,200 share until the lease expires in 3 months.",
+    "options": [
+      {
+        "option_id": "A",
+        "label": "Vigorously interview and screen a replacement roommate",
+        "description": "List room on trusted housing boards. Find replacement with clean credit and background check within 3 weeks.",
+        "financial_effects": {
+          "immediate_cost": -100.0,
+          "monthly_cash_flow_delta": 0,
+          "annual_impact": -100.0,
+          "stability_impact": "Minor screening and posting expense avoids a disastrous $3,600 rent shortfall."
+        }
+      },
+      {
+        "option_id": "B",
+        "label": "Cover the whole rent alone for 3 months ($3,600 total)",
+        "description": "Enjoy living alone for 90 days before lease ends.",
+        "financial_effects": {
+          "immediate_cost": 0,
+          "monthly_cash_flow_delta": -1200.0,
+          "annual_impact": -3600.0,
+          "stability_impact": "Severely exhausts emergency fund; consumes nearly 50% of monthly net income."
+        }
+      }
+    ]
+  },
+  {
+    "id": "evt_015_roth_ira_annual_milestone",
+    "title": "Year-End Roth IRA Contribution Sprint",
+    "category": "Retirement",
+    "chapter": 5,
+    "prompt": "It's December 15. You have contributed $4,500 of the $7,000 annual limit to your Roth IRA. You have $2,500 in excess checking beyond your 3-month emergency fund.",
+    "options": [
+      {
+        "option_id": "A",
+        "label": "Max out the full $7,000 limit with the remaining $2,500",
+        "description": "Fill your annual tax-free bucket completely before the April tax deadline.",
+        "financial_effects": {
+          "immediate_cost": -2500.0,
+          "monthly_cash_flow_delta": 0,
+          "annual_impact": 2500.0,
+          "stability_impact": "Compounds tax-free for the next 35 years; projected to grow to over $26,000 at historical 7% real returns."
+        }
+      },
+      {
+        "option_id": "B",
+        "label": "Keep the $2,500 in cash HYSA buffer",
+        "description": "Forego maxing out the tax-free vehicle to maintain an extra thick cash blanket.",
+        "financial_effects": {
+          "immediate_cost": 0,
+          "monthly_cash_flow_delta": 8.0,
+          "annual_impact": 96.0,
+          "stability_impact": "High nominal safety, but permanently forfeits this year's irreplaceable $2,500 tax-free capacity."
+        }
+      }
+    ]
+  }
+]

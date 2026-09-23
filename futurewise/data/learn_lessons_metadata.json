@@ -1,0 +1,250 @@
+[
+  {
+    "topic_id": "roth_vs_trad_ira",
+    "title": "Roth vs. Traditional IRA: Pay Taxes Now or Later?",
+    "category": "Retirement & Taxes",
+    "estimated_minutes": 6,
+    "prerequisites": [],
+    "grounding_source": {
+      "document": "IRS Publication 590-A",
+      "title": "Contributions to Individual Retirement Arrangements (IRAs)",
+      "sections": [
+        "What Is a Traditional IRA?",
+        "What Is a Roth IRA?",
+        "Income Phaseout Limits"
+      ]
+    },
+    "summary": "Understand the core distinction between Traditional IRAs (pre-tax deduction now, taxed on withdrawal) and Roth IRAs (pay taxes today, 100% tax-free growth and withdrawals forever). Learn how marginal tax brackets guide the choice.",
+    "key_takeaways": [
+      "Traditional IRAs lower your taxable income in the year you contribute.",
+      "Roth IRAs are funded with after-tax dollars, but your investment growth and future retirement distributions are 100% tax-free.",
+      "If you expect your tax rate to be higher in retirement than today (common for young professionals in early career stages), a Roth IRA is mathematically superior.",
+      "Contributions (your principal) to a Roth IRA can be withdrawn at any time penalty-free."
+    ],
+    "interactive_calculator_type": "roth_vs_trad_comparator",
+    "sandbox_script_hook": "compare_roth_vs_traditional(current_income, projected_retirement_bracket)"
+  },
+  {
+    "topic_id": "401k_and_employer_match",
+    "title": "401(k) & Employer Match: Don't Leave Free Money Behind",
+    "category": "Retirement & Investing",
+    "estimated_minutes": 5,
+    "prerequisites": [],
+    "grounding_source": {
+      "document": "CFPB 'Your Money, Your Goals' Toolkit",
+      "title": "Saving for Retirement & Long-Term Goals",
+      "sections": [
+        "Employer-Sponsored Plans",
+        "Understanding the Match"
+      ]
+    },
+    "summary": "Demystify employer 401(k) plans, automated payroll deductions, and how an employer match represents an immediate guaranteed 50% to 100% return on your dollars.",
+    "key_takeaways": [
+      "An employer match is literally part of your negotiated total compensation; skipping it is equivalent to turning down a raise.",
+      "Common match structures include 100% match up to 3-5% of salary, or 50% match up to 6%.",
+      "Contributions reduce your current federal and state tax withholding directly on your paystub.",
+      "Understand the company vesting schedule to know when matched funds belong to you 100%."
+    ],
+    "interactive_calculator_type": "match_maximizer_calculator",
+    "sandbox_script_hook": "calculate_401k_match_and_tax_shield(salary, match_percent, contribution_percent)"
+  },
+  {
+    "topic_id": "hsa_triple_tax_advantage",
+    "title": "Health Savings Account (HSA): The Triple-Tax Secret Weapon",
+    "category": "Healthcare & Investing",
+    "estimated_minutes": 7,
+    "prerequisites": [],
+    "grounding_source": {
+      "document": "IRS Publication 969",
+      "title": "Health Savings Accounts and Other Tax-Favored Health Plans",
+      "sections": [
+        "HSA Eligibility",
+        "Qualifying HDHP Requirements",
+        "Distributions"
+      ]
+    },
+    "summary": "Discover why the HSA is often called the most tax-efficient account in the U.S. tax code. Learn about the triple-tax advantage, eligibility criteria under High Deductible Health Plans (HDHP), and how to invest HSA funds for healthcare in retirement.",
+    "key_takeaways": [
+      "Triple tax advantage: 1. Tax-deductible going in (payroll deduction skips FICA too). 2. Growth is tax-free. 3. Withdrawals for qualified medical expenses are tax-free.",
+      "Unlike FSAs, HSA balances never expire and roll over year after year indefinitely.",
+      "Once your cash buffer covers your deductible, excess HSA dollars can be invested in low-cost index funds.",
+      "After age 65, HSA funds can be withdrawn for non-medical expenses with no penalty (taxed just like a Traditional IRA)."
+    ],
+    "interactive_calculator_type": "hsa_vs_fsa_comparator",
+    "sandbox_script_hook": "compare_hsa_vs_fsa_savings(salary, medical_spend, plan_type)"
+  },
+  {
+    "topic_id": "health_and_dependent_care_fsa",
+    "title": "Health & Dependent Care FSAs: The 'Use-It-or-Lose-It' Rules",
+    "category": "Healthcare & Budgeting",
+    "estimated_minutes": 5,
+    "prerequisites": [],
+    "grounding_source": {
+      "document": "IRS Publication 969",
+      "title": "Flexible Spending Arrangements (FSAs)",
+      "sections": [
+        "Healthcare FSA Rules",
+        "Grace Periods & Carryovers",
+        "Dependent Care Limits"
+      ]
+    },
+    "summary": "Learn how Flexible Spending Accounts (FSAs) save 25-35% on predictable out-of-pocket medical, dental, vision, or daycare expenses, while guarding against the strict 'use-it-or-lose-it' deadline trap.",
+    "key_takeaways": [
+      "FSAs allow you to contribute pre-tax dollars to cover known medical, dental, vision, and child care expenses.",
+      "Full Healthcare FSA annual election is available on day 1 of the plan year.",
+      "Most unspent funds forfeit at the end of the year unless your plan has a $640+ carryover or a 2.5-month grace period.",
+      "Never over-elect in an FSA; budget only for predictable, high-probability expenses."
+    ],
+    "interactive_calculator_type": "fsa_tax_savings_estimator",
+    "sandbox_script_hook": "calculate_fsa_tax_savings(anticipated_expenses, tax_bracket)"
+  },
+  {
+    "topic_id": "emergency_funds",
+    "title": "Emergency Funds: Your First Defense Against High-Interest Debt",
+    "category": "Financial Stability",
+    "estimated_minutes": 4,
+    "prerequisites": [],
+    "grounding_source": {
+      "document": "CFPB 'Your Money, Your Goals' Toolkit",
+      "title": "Building Savings & Managing Cash Flow",
+      "sections": [
+        "Emergency Savings Target",
+        "Choosing a Safe Account"
+      ]
+    },
+    "summary": "Why saving 3 to 6 months of baseline living expenses in a High-Yield Savings Account (HYSA) separates people who survive financial emergencies with zero debt from those who get trapped by 25% APR credit cards.",
+    "key_takeaways": [
+      "Baseline expenses are your 'survival budget' (rent, groceries, basic utilities, minimum debt payments), not full discretionary spending.",
+      "Keep emergency cash in a liquid High-Yield Savings Account (HYSA) separate from checking to avoid temptation.",
+      "A starter buffer of $1,000 to 1 month of expenses provides immediate psychological relief before tackling debt.",
+      "Replenishing an emergency fund takes precedence after an unexpected expense occurs."
+    ],
+    "interactive_calculator_type": "emergency_fund_runway_calculator",
+    "sandbox_script_hook": "calculate_emergency_runway(current_cash, monthly_baseline_expenses)"
+  },
+  {
+    "topic_id": "credit_scores_and_health",
+    "title": "Credit Scores Demystified: The Hidden Cost of Low Credit",
+    "category": "Credit & Borrowing",
+    "estimated_minutes": 6,
+    "prerequisites": [],
+    "grounding_source": {
+      "document": "CFPB 'Your Money, Your Goals' Toolkit",
+      "title": "Understanding Credit Reports and Scores",
+      "sections": [
+        "What Makes Up a Score",
+        "Disputing Errors",
+        "Rebuilding Credit"
+      ]
+    },
+    "summary": "Break down the FICO formula (payment history 35%, credit utilization 30%, length of history 15%, new credit 10%, credit mix 10%). Learn how credit scores dictate apartment approvals, auto loans, and mortgage rates.",
+    "key_takeaways": [
+      "Payment history (35%) is king: one 30-day late payment can drop an excellent score by 60-100 points.",
+      "Credit utilization (30%) is the ratio of balance to limit; keeping it under 10-30% on each card boosts scores rapidly.",
+      "Never pay credit card interest to 'build credit'\u2014paying in full every month builds an identical top-tier score with $0 in interest.",
+      "Check free credit reports annually via annualcreditreport.com to catch identity theft or errors."
+    ],
+    "interactive_calculator_type": "credit_utilization_simulator",
+    "sandbox_script_hook": "simulate_credit_utilization(card_balances, card_limits)"
+  },
+  {
+    "topic_id": "apr_and_debt_paydown",
+    "title": "APR & Debt Elimination: Debt Avalanche vs. Debt Snowball",
+    "category": "Debt Management",
+    "estimated_minutes": 6,
+    "prerequisites": [],
+    "grounding_source": {
+      "document": "CFPB 'Your Money, Your Goals' Toolkit",
+      "title": "Dealing with Debt",
+      "sections": [
+        "Debt Paydown Strategies",
+        "Avalanche vs. Snowball",
+        "Negotiating Rates"
+      ]
+    },
+    "summary": "Understand how Annual Percentage Rate (APR) compounds against you. Compare the mathematically optimal Debt Avalanche method (highest APR first) against the behavioral Debt Snowball method (smallest balance first).",
+    "key_takeaways": [
+      "Credit card debt at 20-29% APR is a financial emergency that out-costs almost all market investment returns.",
+      "Debt Avalanche pays minimums on all debts, putting all surplus toward the highest interest rate\u2014saving the most money.",
+      "Debt Snowball targets the smallest dollar balance first for rapid psychological wins.",
+      "0% balance transfer cards and personal consolidation loans can halt interest accrual if paired with strict spending discipline."
+    ],
+    "interactive_calculator_type": "debt_paydown_comparator",
+    "sandbox_script_hook": "compare_debt_avalanche_vs_snowball(debts_list, extra_monthly_payment)"
+  },
+  {
+    "topic_id": "compound_interest",
+    "title": "The Power of Compound Interest & Time Horizons",
+    "category": "Investing Fundamentals",
+    "estimated_minutes": 5,
+    "prerequisites": [],
+    "grounding_source": {
+      "document": "CFPB 'Your Money, Your Goals' Toolkit",
+      "title": "The Rule of 72 and Compounding",
+      "sections": [
+        "Exponential Growth",
+        "The Cost of Waiting"
+      ]
+    },
+    "summary": "See how compound interest turns small recurring monthly savings into massive wealth over 10, 20, and 30 years. Learn why starting at age 25 vs. age 35 can double your retirement nest egg with less out-of-pocket money.",
+    "key_takeaways": [
+      "Compound interest earns interest on your interest, creating an exponential growth curve over decades.",
+      "Rule of 72: Divide 72 by the annual return rate to approximate how many years it takes your money to double.",
+      "Saving $200/month starting at age 25 at 7% real returns yields ~$240,000+ by age 55, with only $72,000 deposited.",
+      "Time in the market beats timing the market every single time."
+    ],
+    "interactive_calculator_type": "compound_interest_visualizer",
+    "sandbox_script_hook": "calculate_compound_growth(initial_deposit, monthly_addition, years, annual_return)"
+  },
+  {
+    "topic_id": "low_cost_index_funds",
+    "title": "Index Funds & Passive Investing: Owning the Entire Economy",
+    "category": "Investing Fundamentals",
+    "estimated_minutes": 6,
+    "prerequisites": [
+      "compound_interest"
+    ],
+    "grounding_source": {
+      "document": "CFPB 'Your Money, Your Goals' Toolkit",
+      "title": "Investment Basics for Long-Term Security",
+      "sections": [
+        "Mutual Funds & ETFs",
+        "The Impact of Expense Ratios"
+      ]
+    },
+    "summary": "Why trying to pick individual winning stocks fails 90% of professional hedge fund managers. Learn how broad-market index funds (like S&P 500 or Total Stock Market) give you instant diversification for pennies in fees.",
+    "key_takeaways": [
+      "An index fund buys a slice of hundreds or thousands of leading public companies in one single basket.",
+      "Low expense ratios (0.03% to 0.10%) ensure your investment returns stay in your pocket rather than going to financial brokers.",
+      "A 1% management fee can eat up over 25-30% of your total lifetime retirement portfolio value over 35 years.",
+      "Dollar-cost averaging: invest an automatic fixed amount each month regardless of whether headlines say the market is up or down."
+    ],
+    "interactive_calculator_type": "fee_drag_calculator",
+    "sandbox_script_hook": "calculate_fee_drag(portfolio_size, horizon_years, low_fee_pct, high_fee_pct)"
+  },
+  {
+    "topic_id": "tax_brackets_explained",
+    "title": "Tax Brackets: Marginal vs. Effective Rates Demystified",
+    "category": "Taxes & Planning",
+    "estimated_minutes": 5,
+    "prerequisites": [],
+    "grounding_source": {
+      "document": "IRS Publication 590-A & Federal Tax Code",
+      "title": "Understanding Progressive Tax Rates and Deductions",
+      "sections": [
+        "Progressive Brackets",
+        "Standard Deduction",
+        "Marginal Tax Calculation"
+      ]
+    },
+    "summary": "Clear up the widespread misconception that 'getting a raise into a higher tax bracket reduces your take-home pay.' Master the difference between your marginal tax rate (tax on your last dollar) and effective tax rate (average tax on all dollars).",
+    "key_takeaways": [
+      "The U.S. uses progressive tax brackets; only the income within that specific bracket is taxed at the higher percentage rate.",
+      "Getting a raise will NEVER cause you to take home less money overall.",
+      "Standard deduction (over $14,600+ for single filers) means your first chunk of earned income is taxed at 0%.",
+      "Pre-tax deductions (401k, HSA, Traditional IRA) reduce income from your highest marginal bracket first, maximizing immediate cash savings."
+    ],
+    "interactive_calculator_type": "tax_bracket_breakdown_calculator",
+    "sandbox_script_hook": "calculate_marginal_vs_effective_rate(income, filing_status, pre_tax_deductions)"
+  }
+]

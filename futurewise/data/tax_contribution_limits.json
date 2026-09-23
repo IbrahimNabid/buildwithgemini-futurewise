@@ -1,0 +1,133 @@
+[
+  {
+    "tax_year": 2024,
+    "ira": {
+      "regular_contribution_limit": 7000,
+      "catch_up_limit_age_50_plus": 1000,
+      "total_limit_with_catch_up": 8000,
+      "roth_magi_phaseout_single": {
+        "start": 146000,
+        "end": 161000
+      },
+      "roth_magi_phaseout_mfj": {
+        "start": 230000,
+        "end": 240000
+      },
+      "notes": "Roth contributions are made with after-tax dollars; growth and qualified withdrawals are 100% tax-free."
+    },
+    "hsa": {
+      "individual_coverage_limit": 4150,
+      "family_coverage_limit": 8300,
+      "catch_up_limit_age_55_plus": 1000,
+      "hdhp_min_deductible_individual": 1600,
+      "hdhp_min_deductible_family": 3200,
+      "hdhp_max_out_of_pocket_individual": 8050,
+      "hdhp_max_out_of_pocket_family": 16100,
+      "notes": "Triple tax advantage: pre-tax contributions, tax-free growth, tax-free withdrawals for qualified medical expenses."
+    },
+    "healthcare_fsa": {
+      "employee_salary_reduction_limit": 3200,
+      "max_carryover_to_next_year": 640,
+      "notes": "Use-it-or-lose-it rule applies; employer plan may offer a grace period or up to $640 rollover."
+    },
+    "dependent_care_fsa": {
+      "limit_single_or_mfj": 5000,
+      "limit_married_filing_separately": 2500,
+      "notes": "Pre-tax dollars for qualifying daycare, preschool, before/after school care for children under 13."
+    },
+    "retirement_401k_403b": {
+      "employee_elective_deferral_limit": 23000,
+      "catch_up_limit_age_50_plus": 7500,
+      "total_employee_limit_with_catch_up": 30500,
+      "combined_employer_employee_limit": 69000
+    }
+  },
+  {
+    "tax_year": 2025,
+    "ira": {
+      "regular_contribution_limit": 7000,
+      "catch_up_limit_age_50_plus": 1000,
+      "total_limit_with_catch_up": 8000,
+      "roth_magi_phaseout_single": {
+        "start": 150000,
+        "end": 165000
+      },
+      "roth_magi_phaseout_mfj": {
+        "start": 236000,
+        "end": 246000
+      },
+      "notes": "Indexed for inflation. Contributions can be made up until the tax filing deadline."
+    },
+    "hsa": {
+      "individual_coverage_limit": 4300,
+      "family_coverage_limit": 8550,
+      "catch_up_limit_age_55_plus": 1000,
+      "hdhp_min_deductible_individual": 1650,
+      "hdhp_min_deductible_family": 3300,
+      "hdhp_max_out_of_pocket_individual": 8300,
+      "hdhp_max_out_of_pocket_family": 16600,
+      "notes": "Requires enrollment in an HSA-eligible High Deductible Health Plan (HDHP)."
+    },
+    "healthcare_fsa": {
+      "employee_salary_reduction_limit": 3300,
+      "max_carryover_to_next_year": 660,
+      "notes": "Funds generally forfeit at plan year-end unless subject to 2.5 month grace period or carryover."
+    },
+    "dependent_care_fsa": {
+      "limit_single_or_mfj": 5000,
+      "limit_married_filing_separately": 2500,
+      "notes": "Statutory limit set by Congress, not indexed for inflation."
+    },
+    "retirement_401k_403b": {
+      "employee_elective_deferral_limit": 23500,
+      "catch_up_limit_age_50_plus": 7500,
+      "special_catch_up_ages_60_to_63": 11250,
+      "total_employee_limit_with_catch_up": 31000,
+      "combined_employer_employee_limit": 70000
+    }
+  },
+  {
+    "tax_year": 2026,
+    "ira": {
+      "regular_contribution_limit": 7500,
+      "catch_up_limit_age_50_plus": 1000,
+      "total_limit_with_catch_up": 8500,
+      "roth_magi_phaseout_single": {
+        "start": 153000,
+        "end": 168000
+      },
+      "roth_magi_phaseout_mfj": {
+        "start": 240000,
+        "end": 250000
+      },
+      "notes": "IRA limits step up to $7,500 to keep pace with cost-of-living adjustments."
+    },
+    "hsa": {
+      "individual_coverage_limit": 4450,
+      "family_coverage_limit": 8900,
+      "catch_up_limit_age_55_plus": 1000,
+      "hdhp_min_deductible_individual": 1700,
+      "hdhp_min_deductible_family": 3400,
+      "hdhp_max_out_of_pocket_individual": 8550,
+      "hdhp_max_out_of_pocket_family": 17100,
+      "notes": "HSA funds roll over indefinitely and can be invested in mutual funds/ETFs for retirement."
+    },
+    "healthcare_fsa": {
+      "employee_salary_reduction_limit": 3400,
+      "max_carryover_to_next_year": 680,
+      "notes": "Election is fixed during open enrollment unless a qualifying life event occurs."
+    },
+    "dependent_care_fsa": {
+      "limit_single_or_mfj": 5000,
+      "limit_married_filing_separately": 2500,
+      "notes": "Not eligible for rollover; must be incurred during the plan year."
+    },
+    "retirement_401k_403b": {
+      "employee_elective_deferral_limit": 24000,
+      "catch_up_limit_age_50_plus": 8000,
+      "special_catch_up_ages_60_to_63": 11500,
+      "total_employee_limit_with_catch_up": 32000,
+      "combined_employer_employee_limit": 71500
+    }
+  }
+]

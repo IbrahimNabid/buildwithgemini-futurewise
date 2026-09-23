@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Futurewise - Finance Dashboard</title>
+<style>
+  :root {
+    --primary-green: #0a3622;
+    --primary-green-dark: #062316;
+    --accent-emerald: #10b981;
+    --accent-mint: #34d399;
+    --accent-mint-light: #e6f4ea;
+    --accent: #137333;
+    --accent-hover: #0d5c28;
+    --sidebar-hover: rgba(255, 255, 255, 0.08);
+    --sidebar-active: rgba(52, 211, 153, 0.16);
+    --bg-main: #f8fafc;
+    --card-bg: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg-main);
+    color: var(--text-primary);
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Left Sidebar */
+  aside {
+    width: 270px;
+    background: linear-gradient(180deg, var(--primary-green) 0%, var(--primary-green-dark) 100%);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 1.6rem 1.1rem;
+    flex-shrink: 0;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.06);
+  }
+  .brand {
+    padding: 0 0.6rem 1.6rem;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+  .brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.45rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: #fff;
+  }
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--accent-mint) 0%, var(--accent-emerald) 100%);
+    border-radius: 9px;
+    color: #062316;
+    flex-shrink: 0;
+  }
+  .logo-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .brand-tagline {
+    font-size: 0.8rem;
+    color: var(--accent-mint);
+    margin-top: 0.45rem;
+    line-height: 1.35;
+    font-weight: 400;
+    opacity: 0.95;
+  }
+  .nav-menu {
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex: 1;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    color: #e2e8f0;
+    font-size: 0.93rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+    border-left: 3px solid transparent;
+  }
+  .nav-svg {
+    width: 20px;
+    height: 20px;
+    stroke: #a7f3d0;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+    transition: stroke 0.15s ease;
+  }
+  .nav-item:hover {
+    background: var(--sidebar-hover);
+    color: #ffffff;
+  }
+  .nav-item:hover .nav-svg {
+    stroke: #ffffff;
+  }
+  .nav-item.active {
+    background: var(--sidebar-active);
+    color: #ffffff;
+    font-weight: 600;
+    border-left-color: var(--accent-mint);
+  }
+  .nav-item.active .nav-svg {
+    stroke: var(--accent-mint);
+  }
+  .sidebar-footer {
+    padding: 0.75rem;
+    font-size: 0.76rem;
+    color: #6ee7b7;
+    opacity: 0.75;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* Main Area */
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    padding: 1.4rem 2.2rem 1.2rem;
+  }
+
+  /* Greeting Header */
+  .dashboard-header {
+    margin-bottom: 1.15rem;
+  }
+  .greeting-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: var(--text-primary);
+    margin: 0;
+  }
+  .greeting-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 0.2rem;
+  }
+
+  /* Top 4 Quick Tiles */
+  .tiles-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.1rem;
+    margin-bottom: 1.15rem;
+  }
+  .action-tile {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.15rem 1.25rem;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease, border-color 0.18s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+  }
+  .action-tile:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(10,54,34,0.09);
+    border-color: #a7f3d0;
+  }
+  .tile-header {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+  .tile-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: var(--accent-mint-light);
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  .tile-icon svg {
+    width: 19px;
+    height: 19px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.1;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .tile-title {
+    font-weight: 600;
+    font-size: 0.96rem;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+  .tile-desc {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  /* Chat & Results Container */
+  .results-card {
+    flex: 1;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin-bottom: 0.9rem;
+    position: relative;
+  }
+  .results-header {
+    padding: 0.85rem 1.6rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fafbfc;
+  }
+  .results-header-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .results-header-badge {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-emerald);
+  }
+  #log {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    scroll-behavior: smooth;
+  }
+
+  /* Friendly Empty State */
+  .empty-state {
+    margin: auto;
+    text-align: center;
+    max-width: 440px;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .empty-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 16px;
+    background: var(--accent-mint-light);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.2rem;
+  }
+  .empty-icon svg {
+    width: 28px;
+    height: 28px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .empty-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .empty-desc {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .msg {
+    margin: 0;
+    animation: fadeIn 0.25s ease-in-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .msg.user {
+    align-self: flex-end;
+    text-align: right;
+  }
+  .msg.agent {
+    align-self: flex-start;
+    max-width: 92%;
+  }
+  .bubble {
+    display: inline-block;
+    padding: 0.9rem 1.25rem;
+    border-radius: 14px;
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    text-align: left;
+    max-width: 100%;
+    white-space: pre-wrap;
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+  .msg.user .bubble {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-bottom-right-radius: 4px;
+  }
+  .msg.agent .bubble {
+    background: #ffffff;
+    border-color: #e2e8f0;
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+  }
+  .bubble.rich {
+    background: transparent;
+    border: none;
+    padding: 0;
+    max-width: 100%;
+    white-space: normal;
+    box-shadow: none;
+  }
+
+  /* Animated Thinking Indicator */
+  .thinking-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.2rem 0;
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+  }
+  .thinking-dots {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+  .thinking-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: bounce 1.4s infinite ease-in-out both;
+  }
+  .thinking-dot:nth-child(1) { animation-delay: -0.32s; }
+  .thinking-dot:nth-child(2) { animation-delay: -0.16s; }
+  @keyframes bounce {
+    0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
+    40% { transform: scale(1); opacity: 1; }
+  }
+  .thinking-label {
+    font-weight: 500;
+    color: var(--accent);
+    transition: opacity 0.25s ease;
+  }
+
+  /* Input Panel */
+  .input-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  form {
+    display: flex;
+    gap: 0.65rem;
+  }
+  input {
+    flex: 1;
+    padding: 0.9rem 1.25rem;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(19,115,51,0.12);
+  }
+  button[type="submit"] {
+    padding: 0.9rem 1.6rem;
+    border: none;
+    border-radius: 12px;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  button[type="submit"]:hover {
+    background: var(--accent-hover);
+  }
+  button[type="submit"]:active {
+    transform: scale(0.98);
+  }
+  button[type="submit"] svg {
+    width: 17px;
+    height: 17px;
+    stroke: #ffffff;
+    fill: none;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  footer {
+    text-align: center;
+    font-size: 0.77rem;
+    color: var(--text-muted);
+    padding: 0.15rem 0;
+  }
+
+  /* --- A2UI component styles (Card, Column, Row, Text, Divider, List, Image, Icon) --- */
+  .a2card {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.25rem;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    max-width: 100%;
+    margin-top: 0.5rem;
+  }
+  .a2card + .a2card, .a2col > .a2card { margin-top: 0.85rem; }
+  .a2col { display: flex; flex-direction: column; gap: 0.5rem; }
+  .a2row { display: flex; flex-direction: row; gap: 0.8rem; align-items: center; flex-wrap: wrap; }
+  .a2row.between { justify-content: space-between; }
+  .a2text { margin: 0; line-height: 1.5; }
+  .a2text.a2-h1 { font-size: 1.4rem; font-weight: 700; color: var(--accent); }
+  .a2text.a2-h2 { font-size: 1.2rem; font-weight: 700; }
+  .a2text.a2-h3 { font-size: 1.05rem; font-weight: 600; }
+  .a2text.a2-h4 { font-size: 0.95rem; font-weight: 600; }
+  .a2text.a2-caption { font-size: 0.82rem; color: var(--text-secondary); }
+  .a2divider { border: none; border-top: 1px solid var(--border); margin: 0.65rem 0; width: 100%; }
+  .a2img { max-width: 100%; border-radius: 10px; display: block; margin: 0.45rem 0; }
+  .material-symbols-outlined { font-size: 1.25rem; line-height: 1; vertical-align: middle; color: var(--accent); }
+
+  @media (max-width: 950px) {
+    .tiles-grid { grid-template-columns: repeat(2, 1fr); }
+    aside { width: 220px; }
+    main { padding: 1.2rem 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Left Sidebar -->
+<aside>
+  <div class="brand">
+    <div class="brand-logo">
+      <div class="logo-icon">
+        <!-- Inline SVG Leaf/Growth -->
+        <svg viewBox="0 0 24 24"><path d="M7 20h10"/><path d="M10 20c0-5 3-7 3-12"/><path d="M13 8c3-3 7-4 7-4s0 4-3 7"/><path d="M12 12c-3-2-6-3-6-3s0 4 3 6"/></svg>
+      </div>
+      <span>Futurewise</span>
+    </div>
+    <div class="brand-tagline">Learn it. Track it. Play it forward.</div>
+  </div>
+
+  <ul class="nav-menu">
+    <li class="nav-item active" data-prompt="Give me my Money Brief">
+      <svg class="nav-svg" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+      <span>Money Brief</span>
+    </li>
+    <li class="nav-item" data-prompt="Which of my free trials should I cancel?">
+      <svg class="nav-svg" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+      <span>Trial Guard</span>
+    </li>
+    <li class="nav-item" data-prompt="Analyze my spending this month">
+      <svg class="nav-svg" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+      <span>Budget</span>
+    </li>
+    <li class="nav-item" data-prompt="Teach me the difference between an HSA and an FSA">
+      <svg class="nav-svg" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 3 3 6 3s6-1 6-3v-5"/></svg>
+      <span>Learn</span>
+    </li>
+    <li class="nav-item" data-prompt="What's happening in the economy this week and what does it mean for me?">
+      <svg class="nav-svg" viewBox="0 0 24 24"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
+      <span>Money News</span>
+    </li>
+    <li class="nav-item" data-prompt="Play my next 20 years">
+      <svg class="nav-svg" viewBox="0 0 24 24"><line x1="6" x2="10" y1="12" y2="12"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="15" x2="15.01" y1="13" y2="13"/><line x1="18" x2="18.01" y1="11" y2="11"/><rect width="20" height="12" x="2" y="6" rx="6"/></svg>
+      <span>Play</span>
+    </li>
+  </ul>
+
+  <div class="sidebar-footer">
+    AI Financial Intelligence
+  </div>
+</aside>
+
+<!-- Main Dashboard Area -->
+<main>
+  <!-- Time-based Greeting Header -->
+  <div class="dashboard-header">
+    <div class="greeting-title" id="greetingText">Good day</div>
+    <div class="greeting-subtitle">Your money, made clear.</div>
+  </div>
+
+  <!-- Top 4 Quick Action Tiles -->
+  <div class="tiles-grid">
+    <div class="action-tile" data-prompt="Give me my Money Brief">
+      <div class="tile-header">
+        <div class="tile-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg>
+        </div>
+        <div class="tile-title">Money Brief</div>
+      </div>
+      <div class="tile-desc">Full executive snapshot of budget, stability & top news</div>
+    </div>
+
+    <div class="action-tile" data-prompt="Which of my free trials should I cancel?">
+      <div class="tile-header">
+        <div class="tile-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="tile-title">Trials Ending Soon</div>
+      </div>
+      <div class="tile-desc">Actionable deadlines, avoid surprises & cancel safely</div>
+    </div>
+
+    <div class="action-tile" data-prompt="Show my monthly budget breakdown and recent expenses">
+      <div class="tile-header">
+        <div class="tile-icon">
+          <svg viewBox="0 0 24 24"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
+        </div>
+        <div class="tile-title">This Month's Budget</div>
+      </div>
+      <div class="tile-desc">Spending tracking, category caps & safe-to-spend limits</div>
+    </div>
+
+    <div class="action-tile" data-prompt="Run a financial stability check on my accounts">
+      <div class="tile-header">
+        <div class="tile-icon">
+          <svg viewBox="0 0 24 24"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 7.65l.77.78L12 20.66l7.65-7.65.77-.78a5.4 5.4 0 0 0 0-7.65z"/></svg>
+        </div>
+        <div class="tile-title">Stability Check</div>
+      </div>
+      <div class="tile-desc">Savings runway, savings rate & debt safety score</div>
+    </div>
+  </div>
+
+  <!-- Chat / Results Panel -->
+  <div class="results-card">
+    <div class="results-header">
+      <div class="results-header-title">
+        <span class="results-header-badge"></span>
+        <span>Advisory & Simulation Feed</span>
+      </div>
+    </div>
+    <div id="log">
+      <!-- Friendly Empty State -->
+      <div class="empty-state" id="emptyState">
+        <div class="empty-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="empty-title">Welcome to Futurewise</div>
+        <div class="empty-desc">Select an action above or ask anything about your expenses, free trials, retirement limits, or financial simulation scenarios.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Input Bar -->
+  <div class="input-panel">
+    <form id="form">
+      <input id="input" placeholder="Ask Futurewise a financial question or click an action above…" autocomplete="off" autofocus>
+      <button type="submit">
+        <span>Send</span>
+        <svg viewBox="0 0 24 24"><line x1="22" x2="11" y1="2" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </form>
+    <footer>Educational only, not financial advice.</footer>
+  </div>
+</main>
+
+<script>
+const log = document.getElementById("log");
+const form = document.getElementById("form");
+const input = document.getElementById("input");
+
+// Time-based greeting
+(function setGreeting() {
+  const hr = new Date().getHours();
+  let greet = "Good evening";
+  if (hr < 12) greet = "Good morning";
+  else if (hr < 17) greet = "Good afternoon";
+  const el = document.getElementById("greetingText");
+  if (el) el.textContent = greet;
+})();
+
+// Wire all clickable tiles and sidebar nav items
+document.querySelectorAll("[data-prompt]").forEach(el => {
+  el.addEventListener("click", () => {
+    // Highlight sidebar active item
+    if (el.classList.contains("nav-item")) {
+      document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
+      el.classList.add("active");
+    }
+    const prompt = el.getAttribute("data-prompt");
+    if (prompt) {
+      input.value = prompt;
+      form.dispatchEvent(new Event("submit"));
+    }
+  });
+});
+
+function el(tag, cls, text) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text != null) e.textContent = text;
+  return e;
+}
+
+function bubble(who) {
+  // Remove empty state on first message
+  const empty = document.getElementById("emptyState");
+  if (empty) empty.remove();
+
+  const m = el("div", "msg " + who);
+  const b = el("div", "bubble");
+  m.appendChild(b);
+  log.appendChild(m);
+  log.scrollTop = log.scrollHeight;
+  return b;
+}
+
+/* ----------------------------------------------------------------------------
+ * A2UI mini-renderer (v0.8 Basic Catalog subset).
+ * Renders Card / Column / Row / Text / Divider / List / Image / Icon.
+ * -------------------------------------------------------------------------- */
+function boundStr(v) {
+  if (v == null) return "";
+  if (typeof v === "string") return v;
+  if (typeof v.literalString === "string") return v.literalString;
+  return "";
+}
+
+function childIds(props) {
+  const ids = [];
+  if (props && typeof props.child === "string") ids.push(props.child);
+  const ch = props && props.children;
+  if (ch && Array.isArray(ch.explicitList)) {
+    for (const c of ch.explicitList) if (typeof c === "string") ids.push(c);
+  }
+  return ids;
+}
+
+function iconName(n) {
+  return String(n || "").replace(/([a-z0-9])([A-Z])/g, "$1_$2").replace(/\s+/g, "_").toLowerCase();
+}
+
+function buildNode(id, comps, seen) {
+  if (!id || seen.has(id)) return null;
+  seen.add(id);
+  const spec = comps[id];
+  if (!spec || typeof spec !== "object") return null;
+  const type = Object.keys(spec)[0];
+  const props = spec[type] || {};
+  const kids = () => childIds(props).map(cid => buildNode(cid, comps, seen)).filter(Boolean);
+
+  switch (type) {
+    case "Card": {
+      const d = el("div", "a2card");
+      kids().forEach(k => d.appendChild(k));
+      return d;
+    }
+    case "Column": {
+      const d = el("div", "a2col");
+      kids().forEach(k => d.appendChild(k));
+      return d;
+    }
+    case "Row": {
+      const d = el("div", "a2row");
+      if (props.distribution === "spaceBetween" || props.distribution === "space_between") d.classList.add("between");
+      kids().forEach(k => d.appendChild(k));
+      return d;
+    }
+    case "Text": {
+      const d = el("div", "a2text", boundStr(props.text));
+      const hint = props.usageHint;
+      if (hint === "h1" || hint === "h2" || hint === "h3" || hint === "h4" || hint === "caption") d.classList.add("a2-" + hint);
+      return d;
+    }
+    case "Divider": {
+      return el("hr", "a2divider");
+    }
+    case "List": {
+      const d = el("div", "a2col");
+      kids().forEach(k => d.appendChild(k));
+      return d;
+    }
+    case "Image": {
+      const src = boundStr(props.url);
+      if (!/^https?:\/\//i.test(src)) return null;
+      const img = el("img", "a2img");
+      img.src = src;
+      img.alt = boundStr(props.alt) || "Image";
+      return img;
+    }
+    case "Icon": {
+      const span = el("span", "material-symbols-outlined");
+      span.textContent = iconName(boundStr(props.name));
+      return span;
+    }
+    default:
+      return null;
+  }
+}
+
+function renderSurface(messages, container) {
+  const comps = {};
+  for (const m of messages) {
+    const su = m.surfaceUpdate;
+    if (su && Array.isArray(su.components)) {
+      for (const c of su.components) if (c && c.id && c.component) comps[c.id] = c.component;
+    }
+  }
+  let rootIds = [];
+  for (const m of messages) {
+    const br = m.beginRendering;
+    if (br && typeof br.root === "string") rootIds.push(br.root);
+  }
+  if (!rootIds.length) {
+    const referenced = new Set();
+    for (const id in comps) {
+      const spec = comps[id];
+      childIds(spec[Object.keys(spec)[0]] || {}).forEach(c => referenced.add(c));
+    }
+    rootIds = Object.keys(comps).filter(id => !referenced.has(id));
+  }
+  let drew = false;
+  for (const rid of rootIds) {
+    const node = buildNode(rid, comps, new Set());
+    if (node) { container.appendChild(node); drew = true; }
+  }
+  return drew;
+}
+
+function flattenText(messages) {
+  const out = [];
+  for (const m of messages) {
+    const su = m.surfaceUpdate;
+    if (su && Array.isArray(su.components)) {
+      for (const c of su.components) if (c && c.component && c.component.Text) out.push(boundStr(c.component.Text.text));
+    }
+  }
+  return out.join("\n").trim();
+}
+
+function renderReply(b, parts) {
+  b.textContent = "";
+  const texts = parts.filter(p => p && (p.kind === "text" || (!p.kind && p.text))).map(p => p.text || "");
+  const a2ui = parts.filter(p => p && p.kind === "a2ui" && p.data).map(p => p.data);
+
+  const textStr = texts.join("\n").trim();
+  if (textStr) b.appendChild(el("div", null, textStr));
+
+  if (a2ui.length) {
+    b.classList.add("rich");
+    if (!renderSurface(a2ui, b)) b.appendChild(el("div", null, flattenText(a2ui) || "(no card content)"));
+  }
+  if (!b.childNodes.length) b.textContent = "(no response)";
+  log.scrollTop = log.scrollHeight;
+}
+
+// Thinking Indicator helper
+function createThinkingIndicator() {
+  const container = el("div", "thinking-container");
+  const dots = el("div", "thinking-dots");
+  dots.appendChild(el("div", "thinking-dot"));
+  dots.appendChild(el("div", "thinking-dot"));
+  dots.appendChild(el("div", "thinking-dot"));
+  const label = el("div", "thinking-label", "Checking your trials…");
+  container.appendChild(dots);
+  container.appendChild(label);
+
+  const labels = [
+    "Checking your trials…",
+    "Crunching the numbers…",
+    "Reading the news…",
+    "Consulting IRS guidelines…",
+    "Evaluating stability…"
+  ];
+  let idx = 0;
+  const timer = setInterval(() => {
+    idx = (idx + 1) % labels.length;
+    label.style.opacity = "0";
+    setTimeout(() => {
+      label.textContent = labels[idx];
+      label.style.opacity = "1";
+    }, 200);
+  }, 2200);
+
+  return { element: container, stop: () => clearInterval(timer) };
+}
+
+form.addEventListener("submit", async (ev) => {
+  ev.preventDefault();
+  const text = input.value.trim();
+  if (!text) return;
+  bubble("user").textContent = text;
+  input.value = "";
+  const b = bubble("agent");
+
+  // Show animated thinking indicator
+  const thinking = createThinkingIndicator();
+  b.innerHTML = "";
+  b.appendChild(thinking.element);
+
+  try {
+    const res = await fetch("/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: text })
+    });
+    const raw = await res.text();
+    let data;
+    try { data = JSON.parse(raw); }
+    catch { throw new Error(`Server returned non-JSON (HTTP ${res.status}). ${raw.slice(0, 300)}`); }
+    thinking.stop();
+    renderReply(b, data.parts || []);
+  } catch (e) {
+    thinking.stop();
+    b.textContent = "Error: " + e.message;
+  }
+});
+</script>
+</body>
+</html>
