@@ -621,8 +621,11 @@ def delete_item(collection_name: str, item_id: str, user: Dict[str, Any] = Depen
     doc_ref.delete()
     return {"status": "deleted", "id": item_id}
 
-# Mount ONLY v2/frontend/static as single source of truth
+# Static file resolution: Look in ../frontend/static first, fallback to ./static
 static_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../frontend/static"))
+if not os.path.exists(static_dir):
+    static_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "static"))
+
 if os.path.exists(static_dir):
     app.mount("/static", StaticFiles(directory=static_dir), name="static")
 
@@ -632,5 +635,5 @@ if os.path.exists(static_dir):
 
 if __name__ == "__main__":
     import uvicorn
-    port = int(os.environ.get("PORT", 8081))
+    port = int(os.environ.get("PORT", 8080))
     uvicorn.run(app, host="0.0.0.0", port=port)
