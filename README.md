@@ -1,199 +1,98 @@
-<div align="center">
+# Futurewise v2: Autonomous Wealth & Financial Decision System
+> *"Learn it. Track it. Play it forward."*
 
-<img src="assets/build-with-gemini-banner.png" alt="Build with Gemini" width="100%" />
-
-# 🚀 Build with Gemini · Track 3
-
-### The starter kit for Track 3 of the Build with Gemini World Tour, and a showcase of what participants built with it.
-
-Clone this repo, open [Antigravity](https://antigravity.google), and build your own agent-first app on Google Cloud. Every project in the [gallery below](#-featured-projects) was built the same way: prototyped with Antigravity and `agents-cli`, equipped with Memory, tools, storage, and RAG, deployed to Agent Platform, and given a face on Cloud Run.
-
-<br/>
-
-![Build with Gemini](https://img.shields.io/badge/Build%20with%20Gemini-World%20Tour-4285F4?logo=google&logoColor=white)
-![Track 3](https://img.shields.io/badge/Track%203-Agent--First%20Apps-EA4335)
-![Google Cloud](https://img.shields.io/badge/Google%20Cloud-Agent%20Platform-4285F4?logo=googlecloud&logoColor=white)
-![Built with ADK](https://img.shields.io/badge/Built%20with-ADK%20%2B%20agents--cli-34A853)
-![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)
-![Projects](https://img.shields.io/badge/Projects-8-blue)
-
-<sub>📖 <a href="https://cszhu.github.io/build-with-gemini/">Lab Guide</a> · 🛠️ <a href="https://google.github.io/agents-cli/guide/getting-started/">agents-cli</a> · 🤖 <a href="https://google.github.io/adk-docs/">ADK</a></sub>
-
-</div>
+Futurewise v2 is a full-stack, multi-agent, autonomous personal finance platform engineered to help everyday people—especially those without a background in finance—make sound, mathematically optimal money decisions. Futurewise delivers a bank-grade fintech dashboard where the AI assistant acts as a knowledgeable, context-aware co-pilot rather than the sole interface.
 
 ---
 
-## 📚 Table of Contents
+## 🌟 Architecture & Core Systems
 
-- [🧩 Anatomy of a Track 3 Project](#-anatomy-of-a-track-3-project)
-- [📂 Featured Projects](#-featured-projects)
-  - [🛍️ Commerce & Marketplace Agents](#️-commerce--marketplace-agents)
-  - [🍳 Food & Recipe Agents](#-food--recipe-agents)
-  - [✈️ Travel & Local Agents](#️-travel--local-agents)
-  - [💪 Health, Fitness & Wellness Agents](#-health-fitness--wellness-agents)
-  - [📚 Learning & Knowledge Agents](#-learning--knowledge-agents)
-  - [🎨 Creative & Media Agents](#-creative--media-agents)
-  - [🏢 Productivity & Enterprise Agents](#-productivity--enterprise-agents)
-  - [🧪 Experimental & Other](#-experimental--other)
-- [🧠 What's in this Repo](#-whats-in-this-repo)
-- [🧰 Build Your Own](#-build-your-own)
-- [📚 Resources](#-resources)
-- [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
-
----
-
-## 🧩 Anatomy of a Track 3 Project
-
-Every app in this collection is built from the same set of Google Cloud building blocks introduced in the lab. Once you understand this shape, you can read any project here at a glance:
-
-| Layer | What it does | Powered by |
-|---|---|---|
-| 🤖 **The Agent** | The core reasoning loop | [ADK](https://google.github.io/adk-docs/) + [`agents-cli`](https://google.github.io/agents-cli/guide/getting-started/), scaffolded with [Antigravity](https://antigravity.google) |
-| 🧠 **Memory** | Remembers facts across sessions | [Agent Platform Memory Bank](https://docs.cloud.google.com/gemini-enterprise-agent-platform/scale/memory-bank) |
-| 🗄️ **Structured data** | Inventory, records, lists | [Firestore](https://console.cloud.google.com/firestore) |
-| 🖼️ **Files & blobs** | Images, media, assets | [Cloud Storage](https://console.cloud.google.com/storage) |
-| 🔧 **Tools** | Take real actions and fetch real data | ADK function tools |
-| 📖 **RAG** | Answers grounded in your documents | [Vertex AI RAG Engine](https://console.cloud.google.com/agent-platform/rag) |
-| 🎨 **Media generation** | Creates images (and video) on demand | `gemini-3.1-flash-lite-image` (Nano Banana 2 Lite) · Omni (video) |
-| 🧪 **Code sandbox** | Safely runs generated code | Agent Platform code execution |
-| 🪟 **Agent-first UI** | Cards and tables instead of plain text | [A2UI](https://adk.dev/integrations/a2ui/) |
-| 🌐 **Frontend** | A shareable web face | FastAPI proxy on [Cloud Run](https://cloud.google.com/run) |
-
----
-
-## 📂 Featured Projects
-
-A showcase of what workshop participants built with this lab. Entries are added here from the swag and gallery submission form after each event, so the categories below start empty and fill in over time. Browse them for inspiration, or [submit your own](#-contributing) once you've published your project with the `publish-to-github` skill.
-
-<!--
-Add one entry per project, in this format:
-- 🌿 **[Project Name](https://github.com/their-handle/their-repo)**: one-line description of what it does. <br/> <sub>by [@handle](https://github.com/handle)</sub>
-
-Bump the "Projects" badge count at the top when you add one.
--->
-
-### 🛍️ Commerce & Marketplace Agents
-
-### 🍳 Food & Recipe Agents
-
-- 🥫 **[Smart Pantry Recipe Concierge](https://github.com/matthewrose/buildwithgemini-smart-pantry-recipe-concierge)**: Tracks your pantry and recommends recipes grounded in a real recipe corpus. <br/> <sub>by [@matthewrose](https://github.com/matthewrose)</sub>
-
-### ✈️ Travel & Local Agents
-
-- ⛈️ **[SafeStageWX](https://github.com/felix1028/buildwithgemini-safestagewx)**: An agentic mobile app that helps event planners identify weather threats and climate risks for an event given its date and location, providing tailored preparedness timelines from months out down to hourly day-of forecasts. <br/> <sub>by [@felix1028](https://github.com/felix1028)</sub>
-- 🌇 **[Sidewalk & Sun](https://github.com/OlafHaalstra/buildwithgemini-sidewalk-and-sun)**: Recommends sunny or shaded NYC spots from a curated 500-venue corpus, plotted on an interactive map. <br/> <sub>by [@OlafHaalstra](https://github.com/OlafHaalstra)</sub>
-
-### 💪 Health, Fitness & Wellness Agents
-
-- 🏊 **[TriCoach AI](https://github.com/common-aman/buildwithgemini-tricoach-ai)**: A triathlon coach that logs workouts, computes training zones, and generates motivational visuals. <br/> <sub>by [@common-aman](https://github.com/common-aman)</sub>
-
-### 📚 Learning & Knowledge Agents
-
-- 🎤 **[Interview Coach (PrepPal)](https://github.com/VineethBaradi/buildwithgemini-interview-coach)**: A mock-interview coach that runs LLM-driven practice sessions from a Firestore question bank and gives performance feedback. <br/> <sub>by [@VineethBaradi](https://github.com/VineethBaradi)</sub>
-
-### 🎨 Creative & Media Agents
-
-### 🏢 Productivity & Enterprise Agents
-
-- 🔧 **[GitCraft](https://github.com/fpobletemu/buildwithgemini-gitcraft)**: A developer git assistant that inspects your repo and drafts Conventional-Commits-style messages, grounded in a commit-style guide. <br/> <sub>by [@fpobletemu](https://github.com/fpobletemu)</sub>
-- 🖥️ **[IT Helpdesk Agent](https://github.com/NaweedAhmadi/buildwithgemini-it-helpdesk-agent)**: An IT support assistant that answers from a knowledge base and remembers context across sessions, with a ticket dashboard UI. <br/> <sub>by [@NaweedAhmadi](https://github.com/NaweedAhmadi)</sub>
-
-### 🧪 Experimental & Other
-
-- 🃏 **[Poker Agent](https://github.com/jakecho1108/buildwithgemini-poker-agent)**: A poker trainer with a real 800-iteration Monte Carlo equity engine and strategy tips grounded in a poker playbook. <br/> <sub>by [@jakecho1108](https://github.com/jakecho1108)</sub>
-
----
-
-## 🧠 What's in this Repo
-
-The `.agents/` folder teaches Antigravity how to build agents on Google Cloud.
-
-### Skills
-
-A **skill** is a bundle of instructions that loads automatically when it's relevant, so the agent gets the workflow right in fewer steps instead of rediscovering it each time.
-
-| Skill | What it does |
-| --- | --- |
-| [`pick-your-agent-project`](.agents/skills/pick-your-agent-project/SKILL.md) | Brainstorm your app idea and write a project brief |
-| [`troubleshoot-lab-setup`](.agents/skills/troubleshoot-lab-setup/SKILL.md) | Verify your environment and fix common setup errors |
-| [`memory-bank-setup`](.agents/skills/setup-memory-bank/SKILL.md) | Add cross-session memory to your agent with Vertex AI Memory Bank |
-| [`rag-engine-setup`](.agents/skills/build-rag/SKILL.md) | Ground your agent on documents with a serverless Vertex AI RAG corpus |
-| [`enable-a2ui`](.agents/skills/enable-a2ui/SKILL.md) | Make your agent reply with rich UI cards (A2UI) in the ADK dev UI |
-| [`build-agent-frontend`](.agents/skills/build-agent-frontend/SKILL.md) | Generate a FastAPI chat frontend and ship it to Cloud Run |
-| [`record-demo`](.agents/skills/record-demo/SKILL.md) | Record a branded demo video of your agent, with an optional AI soundtrack |
-| [`publish-to-github`](.agents/skills/publish-to-github/SKILL.md) | Publish your finished project to your own GitHub and submit it for swag |
-
-### Pre-configured tools (MCP)
-
-[`.agents/mcp_config.json`](.agents/mcp_config.json) wires up two [Model Context Protocol](https://modelcontextprotocol.io/) servers that authenticate with your gcloud credentials, so the agent can look things up instead of guessing:
-
-- **Firebase**: work directly with Firestore and other Firebase services
-- **Google Developer Knowledge**: grounded access to Google's official docs (Cloud, Firebase, ADK, Agent Platform)
-
-### Layout
-
-```text
-.agents/
-├── mcp_config.json    # Firebase + Developer Knowledge MCP servers
-└── skills/            # the workshop skills listed above
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│                        Vanilla SPA Web Frontend                        │
+│             (Private-Banking Aesthetic, Hash Router, A2UI)             │
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    │ HTTP / REST
+                                    ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│                     FastAPI Application Gateway                        │
+│                 (/v2/backend, Firebase Token Auth)                     │
+└───────┬───────────────────────────┬────────────────────────────┬───────┘
+        │                           │                            │
+        ▼                           ▼                            ▼
+┌─────────────────┐       ┌──────────────────┐         ┌─────────────────┐
+│ Cloud Firestore │       │  ADK Multi-Agent │         │ Cloud Scheduler │
+│  (User Scoped)  │       │   Coordinator    │         │ (8am Daily Cron)│
+└─────────────────┘       └─────────┬────────┘         └────────┬────────┘
+                                    │                           │
+                   ┌────────────────┴────────────────┐          ▼
+                   ▼                                 ▼  ┌────────────────┐
+         Specialist Agents                   Autonomous │ Daily Autopilot│
+       • Budget & Cash-Flow                   Execution │ Scan & Briefs  │
+       • Trial Guard (0-risk cancel)                    └────────────────┘
+       • Debt Avalanche/Snowball
+       • Learn & Tax Education
+       • Markets & News Macro Pulse
+       • Life Mode Game Master
 ```
 
 ---
 
-## 🧰 Build Your Own
+## 🚀 Key Features by Phase
 
-The full, step-by-step walkthrough lives on the **[lab guide](https://cszhu.github.io/build-with-gemini/)**. This is the short version.
+1. **Phase 1: Accounts & Database**
+   - Firebase Authentication with email/password and Google login.
+   - User-scoped Firestore subcollections: `accounts`, `transactions`, `budgets`, `sinking_funds`, `trials`, `subscriptions`, `goals`, `debts`, `lesson_progress`, `game_saves`, `alerts`, `briefs`.
+   - Full CRUD REST API with single-click demo persona seeding (`Taylor Reynolds`, 27, NYC).
+   - Data portability: 1-click export to structured JSON or flattened CSV, and cascading GDPR/CCPA account deletion.
 
-**Prerequisites** (the lab workstation comes with all of this pre-installed; you'll need it if you're running on your own machine):
+2. **Phase 2: Multi-Agent System (ADK)**
+   - **Coordinator Agent**: Context-aware routing based on active UI view and user intent.
+   - **Budget Agent**: Analyzes safe-to-spend weekly balances, budget vs actual, and cash-flow calendars.
+   - **Trial Guard Agent**: Computes countdown days, enforces conservative App Store 2-day cancellation buffers, and generates downloadable `.ics` calendar reminders.
+   - **Debt & Credit Agent**: Computes mathematical payoff schedules comparing Avalanche (highest APR first) and Snowball (lowest balance first), with credit utilization checks.
+   - **Learn Agent & News Agent**: Grounds educational concepts in tax rules (tax year 2026) and translates macroeconomic news for everyday budgets without stock tips.
+   - **Strict Sandbox Execution**: All monetary arithmetic is executed deterministically—never estimated by LLMs.
 
-- A **Google Cloud project** with billing enabled
-- **[Antigravity](https://antigravity.google)** (`agy`), the coding agent that loads the skills above
-- **[agents-cli](https://google.github.io/agents-cli/guide/getting-started/)**, built on the [Agent Development Kit (ADK)](https://google.github.io/adk-docs/)
-- Authenticated gcloud: `gcloud auth login` and `gcloud auth application-default login`
-- A personal **GitHub account** for the final publish-and-submit step
+3. **Phase 3: Autopilot (Autonomous Operations)**
+   - Autonomous scanner triggers via Cloud Scheduler (`0 8 * * * America/New_York`) or on-demand.
+   - Flags trials ending $\le 3$ days, budgets exceeding 80%, upcoming overdraft risks (bills > checking), and generates daily executive Money Briefs.
 
-**Quickstart:**
+4. **Phase 4: Life Mode (The Game)**
+   - Life simulation chapters with choices, branching consequences, and live HUD tracking net worth, cash, debt, simulated credit score, and stress/happiness meters.
+   - 1,000-lives replay decision scoring (luck vs quality) and end-of-game report cards with unlockable achievements.
 
+5. **Phase 5: Knowledge Library (Tax Year 2026)**
+   - 15 comprehensive modules covering paystubs, W-4 withholding, 3-paycheck months, marginal vs effective tax rates, standard deductions, HYSAs, sinking funds, 401(k) matches, HSA vs FSA rules, and credit freezes. Each module includes a 3-question mastery quiz.
+
+6. **Phase 6: Fintech Edge Cases Handled**
+   - Multi-bank CSV format column auto-mapping.
+   - Non-judgmental crisis guidance and assistance links (e.g. 211 resources, hospital bill itemization).
+   - Strict prompt-injection shielding treating financial transactions as data, not instructions.
+   - Mandatory official links (`studentaid.gov`, `irs.gov`, `consumerfinance.gov`).
+
+7. **Phase 7: Premium Bank-Grade Frontend**
+   - Modern desktop-first design: `#F5F7FA` canvas, `#0B1F3A` deep navy, `#0E9F6E` emerald accents, `#C9A227` gold highlights, tabular numerals (`tnum`), and slide-in drawer assistant.
+
+---
+
+## 🛠️ Local Development & Deployment
+
+### Run Locally:
 ```bash
-git clone https://github.com/cszhu/build-with-gemini
-cd build-with-gemini
-agy
+# Backend & Frontend (Port 8081)
+export PYTHONPATH=.
+v2/backend/.venv/bin/python3 -m v2.backend.main
 ```
+Visit `http://localhost:8081` in your browser.
 
-On startup, Antigravity scans the `.agents/` folder and loads the skills and tools above automatically. In the AGY prompt:
-
-```text
-/skills            # see the installed skills
-/mcp               # confirm the firebase + google-developer-knowledge tools are connected
-```
-
-```text
-Verify my setup.   # runs the troubleshoot-lab-setup skill to check your environment
-```
-
-Then follow the [lab guide](https://cszhu.github.io/build-with-gemini/) to design, build, deploy, and share your agent, start to finish.
+### Cloud Deployment:
+Deployed to Google Cloud Run:
+- **Service**: `futurewise-v2-backend`
+- **Region**: `us-east1`
+- **Project**: `qwiklabs-gcp-04-7459370ad109`
 
 ---
 
-## 📚 Resources
-
-- **[Lab guide](https://cszhu.github.io/build-with-gemini/)**: the step-by-step workshop
-- [Antigravity](https://antigravity.google)
-- [agents-cli](https://google.github.io/agents-cli/guide/getting-started/)
-- [Agent Development Kit (ADK)](https://google.github.io/adk-docs/)
-- [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform)
-
----
-
-## 🤝 Contributing
-
-**Built something?** Publish it with the `publish-to-github` skill and submit it through the form it gives you. Submissions get you swag, and standout projects get added to the [Featured Projects](#-featured-projects) gallery above.
-
-**Found a bug?** If you hit a rough edge in a skill or the lab, please [open an issue](https://github.com/cszhu/build-with-gemini/issues).
-
----
-
-## 📄 License
-
-This is not an officially supported Google product and is provided for the Build with Gemini workshop for demonstration purposes only.
+## ⚖️ Disclaimer
+*Educational only, not financial or legal advice. All simulation scores and calculations are for illustrative learning purposes.*
