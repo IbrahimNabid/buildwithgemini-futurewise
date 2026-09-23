@@ -16,10 +16,10 @@
       --gold-light: #FEF08A;
       --danger: #E02424;
       --danger-light: #FDE8E8;
-      --border: #E6EAF0;
+      --border: #E5E7EB;
       --text: #1F2A37;
       --text-muted: #6B7280;
-      --radius: 16px;
+      --radius: 14px;
       --sidebar-w: 260px;
       --drawer-w: 430px;
     }
@@ -33,6 +33,15 @@
       overflow: hidden;
     }
     .tnum { font-feature-settings: "tnum" on, "lnum" on; }
+
+    /* SKELETON LOADERS */
+    .skeleton {
+      background: linear-gradient(90deg, #eceff1 25%, #f5f7fa 50%, #eceff1 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 6px;
+    }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
     /* SIDEBAR */
     #sidebar {
@@ -74,19 +83,19 @@
       padding: 11px 14px;
       border-radius: 10px;
       color: rgba(255,255,255,0.75);
-      text-decoration: none;
       font-size: 0.88rem;
       font-weight: 500;
       cursor: pointer;
       margin-bottom: 2px;
       transition: all 0.15s ease;
+      user-select: none;
     }
     .nav-item:hover {
       background: rgba(255,255,255,0.06);
       color: #fff;
     }
     .nav-item.active {
-      background: rgba(14, 159, 110, 0.18);
+      background: rgba(14, 159, 110, 0.2);
       color: #31C48D;
       font-weight: 600;
       border-left: 3px solid var(--emerald);
@@ -95,10 +104,13 @@
       padding: 16px;
       border-top: 1px solid rgba(255,255,255,0.08);
       font-size: 0.75rem;
-      color: rgba(255,255,255,0.5);
+      color: rgba(255,255,255,0.6);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    /* MAIN CONTENT */
+    /* MAIN */
     #main {
       flex: 1;
       display: flex;
@@ -144,7 +156,7 @@
     .topbar-right {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
     .btn {
       display: inline-flex;
@@ -173,21 +185,27 @@
       border-color: var(--emerald);
     }
     .btn-emerald:hover { background: #0b8058; }
+    .btn-danger {
+      background: var(--danger-light);
+      color: var(--danger);
+      border-color: #FECACA;
+    }
+    .btn-danger:hover { background: #FDE8E8; }
 
-    /* VIEW CONTAINER */
+    /* CONTENT AREA */
     #content-area {
       flex: 1;
       overflow-y: auto;
       padding: 24px 28px;
     }
     .page-title {
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       font-weight: 700;
       color: var(--navy);
       margin-bottom: 18px;
     }
 
-    /* KPI CARDS */
+    /* KPI GRID */
     .kpi-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -199,7 +217,6 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 18px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
     }
     .kpi-label {
       font-size: 0.78rem;
@@ -209,7 +226,7 @@
       letter-spacing: 0.03em;
     }
     .kpi-val {
-      font-size: 1.6rem;
+      font-size: 1.55rem;
       font-weight: 700;
       color: var(--navy);
       margin: 8px 0 4px;
@@ -219,7 +236,7 @@
       color: var(--text-muted);
     }
 
-    /* CARD / PANELS */
+    /* PANELS */
     .panel-grid {
       display: grid;
       grid-template-columns: 2fr 1fr;
@@ -231,6 +248,7 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 20px;
+      margin-bottom: 20px;
     }
     .panel-header {
       display: flex;
@@ -244,16 +262,34 @@
       color: var(--navy);
     }
 
-    /* TRIAL TABLE & ITEMS */
-    .item-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 0;
-      border-bottom: 1px solid #F3F4F6;
+    /* TABLES */
+    .table-responsive {
+      overflow-x: auto;
     }
-    .item-row:last-child { border-bottom: none; }
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      text-align: left;
+    }
+    table.data-table th {
+      padding: 10px 14px;
+      border-bottom: 2px solid var(--border);
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    table.data-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    table.data-table tr:hover td {
+      background: #F9FAFB;
+    }
+
+    /* BADGES */
     .badge {
+      display: inline-block;
       font-size: 0.7rem;
       font-weight: 700;
       padding: 3px 8px;
@@ -263,74 +299,31 @@
     .badge-amber { background: var(--gold-light); color: #B45309; }
     .badge-emerald { background: var(--emerald-light); color: var(--emerald); }
 
-    /* LESSON CARDS */
-    .lesson-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+    /* PROGRESS BAR */
+    .prog-track {
+      width: 100%;
+      height: 8px;
+      background: #E5E7EB;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 6px;
     }
-    .lesson-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .lesson-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      border-color: var(--emerald);
-    }
-    .lesson-cat {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--emerald);
-      text-transform: uppercase;
-    }
-    .lesson-title {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin: 8px 0;
+    .prog-fill {
+      height: 100%;
+      background: var(--emerald);
+      border-radius: 4px;
     }
 
-    /* GAME MODE HUD & SCENE */
-    .hud-bar {
-      background: var(--navy);
-      color: #fff;
-      border-radius: var(--radius);
-      padding: 16px 20px;
-      display: flex;
-      justify-content: space-around;
-      margin-bottom: 20px;
-    }
-    .hud-stat {
+    /* EMPTY / ERROR STATES */
+    .empty-state {
       text-align: center;
+      padding: 48px 20px;
+      color: var(--text-muted);
     }
-    .hud-stat-label {
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.6);
-      text-transform: uppercase;
-    }
-    .hud-stat-val {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #fff;
-      margin-top: 4px;
-    }
-    .choice-card {
-      background: #fff;
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
-      cursor: pointer;
-      margin-bottom: 12px;
-      transition: all 0.15s;
-    }
-    .choice-card:hover {
-      border-color: var(--emerald);
-      background: #F0FDF4;
+    .empty-state h3 {
+      font-size: 1.1rem;
+      color: var(--navy);
+      margin-bottom: 8px;
     }
 
     /* CHAT DRAWER */
@@ -370,7 +363,7 @@
       padding: 10px 14px;
       border-radius: 14px;
       font-size: 0.85rem;
-      line-height: 1.4;
+      line-height: 1.45;
     }
     .msg-user {
       align-self: flex-end;
@@ -402,12 +395,23 @@
     }
     .drawer-input:focus { border-color: var(--emerald); }
 
-    /* FOOTER */
-    .app-footer {
-      text-align: center;
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      padding: 16px;
+    /* AUTH MODAL */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(11, 31, 58, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .modal-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 28px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     }
   </style>
 </head>
@@ -422,7 +426,7 @@
       </h1>
       <p>Autonomous Wealth & Decision System</p>
     </div>
-    <ul class="nav-list">
+    <ul class="nav-list" id="nav-list">
       <li class="nav-item active" data-page="overview">Overview</li>
       <li class="nav-item" data-page="accounts">Accounts & Net Worth</li>
       <li class="nav-item" data-page="budget">Budget & Cash-flow</li>
@@ -435,7 +439,8 @@
       <li class="nav-item" data-page="settings">Settings & Export</li>
     </ul>
     <div class="sidebar-footer">
-      Signed in as <strong>Taylor Reynolds</strong> (27)
+      <span id="user-display">Taylor Reynolds</span>
+      <button class="btn" id="btn-signout" style="padding:4px 8px;font-size:0.7rem;">Sign Out</button>
     </div>
   </aside>
 
@@ -447,8 +452,8 @@
         <span id="date-label" style="font-size:0.82rem;color:var(--text-muted);font-weight:500;"></span>
       </div>
       <div class="topbar-right">
-        <button class="btn" id="btn-seed">Seed Demo Persona</button>
-        <button class="btn" id="btn-autopilot-run">Run Autopilot Now</button>
+        <button class="btn" id="btn-seed">Seed Demo Data</button>
+        <button class="btn" id="btn-autopilot-run">Run Autopilot</button>
         <button class="btn btn-primary" id="btn-open-assistant">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21 15-3-3m0 0-3 3m3-3v8M3 9l3 3m0 0 3-3m-3 3V1"/></svg>
           Ask Assistant
@@ -457,15 +462,15 @@
     </header>
 
     <section id="content-area">
-      <!-- Dynamic Views Loaded by Hash Router -->
+      <!-- Injected by router -->
     </section>
 
-    <footer class="app-footer">
+    <footer style="text-align:center;font-size:0.72rem;color:var(--text-muted);padding:14px;">
       Educational only, not financial advice. All algorithms and tax figures grounded in 2026 regulations.
     </footer>
   </main>
 
-  <!-- CHAT DRAWER -->
+  <!-- ASSISTANT CHAT DRAWER -->
   <aside id="drawer">
     <div class="drawer-header">
       <div>
@@ -485,234 +490,830 @@
     </div>
   </aside>
 
-  <!-- APP SCRIPT & HASH ROUTER -->
+  <!-- AUTH MODAL (Milestone 2) -->
+  <div id="auth-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-card">
+      <h2 style="font-size:1.3rem;font-weight:700;color:var(--navy);margin-bottom:8px;" id="auth-title">Sign In to Futurewise</h2>
+      <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:18px;">Access your live autonomous wealth dashboard.</p>
+      
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;">
+        <input type="email" id="auth-email" placeholder="Email address" style="padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:0.85rem;" />
+        <input type="password" id="auth-pass" placeholder="Password" style="padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:0.85rem;" />
+        <button class="btn btn-primary" id="btn-auth-submit" style="justify-content:center;padding:10px;">Sign In</button>
+      </div>
+
+      <div style="text-align:center;font-size:0.8rem;color:var(--text-muted);margin:10px 0;">or</div>
+      <button class="btn" id="btn-auth-google" style="width:100%;justify-content:center;padding:10px;margin-bottom:14px;">Sign in with Google</button>
+
+      <div style="text-align:center;font-size:0.78rem;">
+        <span id="auth-toggle-msg">Don't have an account?</span>
+        <a href="#" id="auth-toggle-link" style="color:var(--emerald);font-weight:600;margin-left:4px;">Create an account</a>
+      </div>
+      <div style="text-align:center;margin-top:14px;">
+        <a href="#" id="btn-auth-skip" style="font-size:0.75rem;color:var(--text-muted);">Continue as Demo Persona (Local Dev)</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN APPLICATION LOGIC -->
   <script type="module">
-    const API_BASE = "";
-    const AUTH_HEADER = { "Authorization": "Bearer demo-token-taylor_27" };
+    import { api, escapeHtml, renderMarkdown, showToast, downloadFileWithAuth } from './utils.js';
+    import { initAuth, loginWithEmail, registerWithEmail, loginWithGoogle, logoutUser } from './auth.js';
 
-    // Format current date
-    document.getElementById("date-label").innerText = new Date().toLocaleDateString("en-US", { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+    let currentPage = 'overview';
+    let authMode = 'signin';
 
-    let currentPage = "overview";
+    document.getElementById('date-label').innerText = new Date().toLocaleDateString('en-US', {
+      weekday: 'short', month: 'short', day: 'numeric', year: 'numeric'
+    });
 
-    // Drawer management
-    const drawer = document.getElementById("drawer");
-    document.getElementById("btn-open-assistant").onclick = () => openAssistant();
-    document.getElementById("btn-close-drawer").onclick = () => drawer.classList.remove("open");
+    // --- AUTH FLOW ---
+    initAuth(
+      (user) => {
+        document.getElementById('auth-modal').style.display = 'none';
+        document.getElementById('user-display').innerText = user.email || 'Authenticated User';
+        loadPage(currentPage);
+      },
+      () => {
+        // Fallback for local demo or prompt modal
+        document.getElementById('auth-modal').style.display = 'flex';
+      }
+    );
 
-    window.openAssistant = function(prefill = "") {
-      drawer.classList.add("open");
-      document.getElementById("drawer-context").innerText = `Context: ${currentPage.toUpperCase()} page`;
+    document.getElementById('btn-auth-skip').onclick = (e) => {
+      e.preventDefault();
+      document.getElementById('auth-modal').style.display = 'none';
+      loadPage(currentPage);
+    };
+
+    document.getElementById('auth-toggle-link').onclick = (e) => {
+      e.preventDefault();
+      if (authMode === 'signin') {
+        authMode = 'signup';
+        document.getElementById('auth-title').innerText = 'Create an Account';
+        document.getElementById('btn-auth-submit').innerText = 'Sign Up';
+        document.getElementById('auth-toggle-msg').innerText = 'Already have an account?';
+        document.getElementById('auth-toggle-link').innerText = 'Sign in';
+      } else {
+        authMode = 'signin';
+        document.getElementById('auth-title').innerText = 'Sign In to Futurewise';
+        document.getElementById('btn-auth-submit').innerText = 'Sign In';
+        document.getElementById('auth-toggle-msg').innerText = "Don't have an account?";
+        document.getElementById('auth-toggle-link').innerText = 'Create an account';
+      }
+    };
+
+    document.getElementById('btn-auth-submit').onclick = async () => {
+      const email = document.getElementById('auth-email').value.trim();
+      const pass = document.getElementById('auth-pass').value.trim();
+      if (!email || !pass) return showToast('Please enter both email and password', 'error');
+      try {
+        if (authMode === 'signin') {
+          await loginWithEmail(email, pass);
+        } else {
+          await registerWithEmail(email, pass);
+        }
+      } catch (err) {}
+    };
+
+    document.getElementById('btn-auth-google').onclick = async () => {
+      try {
+        await loginWithGoogle();
+      } catch (err) {}
+    };
+
+    document.getElementById('btn-signout').onclick = logoutUser;
+
+    // --- ROUTER (Hash Support, Back/Forward) ---
+    function navigateTo(page, pushHash = true) {
+      currentPage = page;
+      if (pushHash) window.location.hash = page;
+      document.querySelectorAll('.nav-item').forEach(el => {
+        el.classList.toggle('active', el.dataset.page === page);
+      });
+      loadPage(page);
+    }
+
+    window.addEventListener('hashchange', () => {
+      const hashPage = window.location.hash.replace('#', '') || 'overview';
+      if (hashPage !== currentPage) navigateTo(hashPage, false);
+    });
+
+    // Event delegation on sidebar nav items (NO inline onclicks!)
+    document.getElementById('nav-list').addEventListener('click', (e) => {
+      const item = e.target.closest('.nav-item');
+      if (item && item.dataset.page) {
+        navigateTo(item.dataset.page);
+      }
+    });
+
+    // Seed Demo Data Button
+    document.getElementById('btn-seed').onclick = async () => {
+      try {
+        showToast('Initializing demo persona Taylor Reynolds...', 'info');
+        await api('/api/demo/seed', { method: 'POST' });
+        showToast('Demo persona seeded with 60+ transactions!', 'success');
+        loadPage(currentPage);
+      } catch (err) {
+        showToast(`Seed failed: ${err.message}`, 'error');
+      }
+    };
+
+    // Run Autopilot Button
+    document.getElementById('btn-autopilot-run').onclick = async () => {
+      try {
+        showToast('Executing autonomous financial scan...', 'info');
+        const res = await api('/api/autopilot/run-now', { method: 'POST' });
+        showToast(`Autopilot finished! Generated ${res.result?.alerts_created || 0} alert(s).`, 'success');
+        loadPage(currentPage);
+      } catch (err) {
+        showToast(`Autopilot run failed: ${err.message}`, 'error');
+      }
+    };
+
+    // --- ASSISTANT DRAWER ---
+    const drawer = document.getElementById('drawer');
+    document.getElementById('btn-open-assistant').onclick = () => openAssistant();
+    document.getElementById('btn-close-drawer').onclick = () => drawer.classList.remove('open');
+
+    window.openAssistant = function(prefill = '') {
+      drawer.classList.add('open');
+      document.getElementById('drawer-context').innerText = `Context: ${currentPage.toUpperCase()} page`;
       if (prefill) {
-        document.getElementById("drawer-input").value = prefill;
+        document.getElementById('drawer-input').value = prefill;
         sendAssistantMessage();
       }
     };
 
     async function sendAssistantMessage() {
-      const input = document.getElementById("drawer-input");
+      const input = document.getElementById('drawer-input');
       const text = input.value.trim();
       if (!text) return;
-      input.value = "";
+      input.value = '';
 
-      const msgBox = document.getElementById("drawer-messages");
-      msgBox.innerHTML += `<div class="msg msg-user">${text}</div>`;
+      const msgBox = document.getElementById('drawer-messages');
+      msgBox.innerHTML += `<div class="msg msg-user">${escapeHtml(text)}</div>`;
+      msgBox.scrollTop = msgBox.scrollHeight;
+
+      // Loading indicator
+      const loaderId = 'loader-' + Date.now();
+      msgBox.innerHTML += `<div class="msg msg-agent" id="${loaderId}"><span class="skeleton" style="display:inline-block;width:120px;height:14px;"></span></div>`;
       msgBox.scrollTop = msgBox.scrollHeight;
 
       try {
-        const res = await fetch("/api/assistant/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json", ...AUTH_HEADER },
-          body: JSON.stringify({ prompt: text, page: currentPage })
+        const data = await api('/api/assistant/chat', {
+          method: 'POST',
+          body: { prompt: text, page: currentPage }
         });
-        const data = await res.json();
-        const formatted = data.reply.replace(/\n/g, "<br>").replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
-        msgBox.innerHTML += `<div class="msg msg-agent">${formatted}</div>`;
+        document.getElementById(loaderId).innerHTML = renderMarkdown(data.reply);
       } catch (err) {
-        msgBox.innerHTML += `<div class="msg msg-agent">Error contacting assistant.</div>`;
+        document.getElementById(loaderId).innerHTML = `<span style="color:var(--danger)">Error contacting assistant: ${escapeHtml(err.message)}</span> <button class="btn btn-danger" style="padding:2px 6px;font-size:0.7rem;" data-action="retry-chat" data-prompt="${escapeHtml(text)}">Retry</button>`;
       }
       msgBox.scrollTop = msgBox.scrollHeight;
     }
 
-    document.getElementById("btn-send-drawer").onclick = sendAssistantMessage;
-    document.getElementById("drawer-input").onkeydown = (e) => { if (e.key === "Enter") sendAssistantMessage(); };
+    document.getElementById('btn-send-drawer').onclick = sendAssistantMessage;
+    document.getElementById('drawer-input').onkeydown = (e) => { if (e.key === 'Enter') sendAssistantMessage(); };
 
-    // Seed Demo
-    document.getElementById("btn-seed").onclick = async () => {
-      await fetch("/api/demo/seed", { method: "POST", headers: AUTH_HEADER });
-      loadPage(currentPage);
-    };
+    // --- CONTENT AREA EVENT DELEGATION (No inline handlers!) ---
+    const contentArea = document.getElementById('content-area');
+    contentArea.addEventListener('click', async (e) => {
+      const target = e.target.closest('[data-action]');
+      if (!target) return;
+      const action = target.dataset.action;
 
-    // Run Autopilot
-    document.getElementById("btn-autopilot-run").onclick = async () => {
-      await fetch("/api/autopilot/run-now", { method: "POST", headers: AUTH_HEADER });
-      alert("Autopilot daily scan complete! Alerts and brief updated.");
-      loadPage(currentPage);
-    };
-
-    // Navigation
-    document.querySelectorAll(".nav-item").forEach(item => {
-      item.onclick = () => {
-        document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
-        item.classList.add("active");
-        currentPage = item.dataset.page;
-        window.location.hash = currentPage;
-        loadPage(currentPage);
-      };
+      if (action === 'ask-assistant') {
+        openAssistant(target.dataset.prompt);
+      } else if (action === 'download-ics') {
+        const id = target.dataset.id;
+        downloadFileWithAuth(`/api/trials/${id}/ics`, `trial_reminder_${id}.ics`);
+      } else if (action === 'export-json') {
+        downloadFileWithAuth('/api/settings/export?format=json', 'futurewise_export.json');
+      } else if (action === 'export-csv') {
+        downloadFileWithAuth('/api/settings/export?format=csv', 'futurewise_export.csv');
+      } else if (action === 'delete-account') {
+        if (confirm('Permanently delete your account and all financial data?')) {
+          try {
+            await api('/api/settings/delete-account', { method: 'DELETE' });
+            showToast('Account permanently deleted', 'info');
+            location.reload();
+          } catch (err) {
+            showToast(`Deletion failed: ${err.message}`, 'error');
+          }
+        }
+      } else if (action === 'start-game') {
+        const diff = target.dataset.diff || 'Normal';
+        try {
+          await api('/api/game/start', { method: 'POST', body: { difficulty: diff } });
+          showToast(`Started Life Mode run (${diff})`, 'success');
+          loadPage('game');
+        } catch (err) {
+          showToast(err.message, 'error');
+        }
+      } else if (action === 'make-choice') {
+        const cid = target.dataset.choiceId;
+        try {
+          const res = await api('/api/game/choice', { method: 'POST', body: { choice_id: cid } });
+          showToast(res.step_result?.feedback || 'Choice applied', 'info');
+          loadPage('game');
+        } catch (err) {
+          showToast(err.message, 'error');
+        }
+      } else if (action === 'rewind-game') {
+        const ch = target.dataset.targetChapter;
+        try {
+          await api('/api/game/rewind', { method: 'POST', body: { target_chapter: ch } });
+          showToast(`Timeline rewound to Chapter ${ch}!`, 'success');
+          loadPage('game');
+        } catch (err) {
+          showToast(err.message, 'error');
+        }
+      } else if (action === 'submit-quiz') {
+        const lessonId = target.dataset.lessonId;
+        const selected = [];
+        document.querySelectorAll(`.quiz-option-${lessonId}:checked`).forEach(radio => {
+          selected.push(parseInt(radio.value, 10));
+        });
+        if (selected.length < 3) {
+          return showToast('Please answer all 3 quiz questions before submitting!', 'warning');
+        }
+        try {
+          const res = await api(`/api/learn/lessons/${lessonId}/quiz`, {
+            method: 'POST',
+            body: { answers: selected }
+          });
+          showToast(`Quiz completed: ${res.score}% (${res.passed ? 'PASSED' : 'TRY AGAIN'})`, res.passed ? 'success' : 'warning');
+          loadPage('learn');
+        } catch (err) {
+          showToast(err.message, 'error');
+        }
+      }
     });
 
+    // --- PAGE RENDERERS ---
     async function loadPage(page) {
-      const container = document.getElementById("content-area");
-      container.innerHTML = `<p style="color:var(--text-muted);">Loading live data...</p>`;
-
-      if (page === "overview") {
-        const [budgets, accounts, trials, alerts, briefs] = await Promise.all([
-          fetch("/api/budgets", { headers: AUTH_HEADER }).then(r => r.json()),
-          fetch("/api/accounts", { headers: AUTH_HEADER }).then(r => r.json()),
-          fetch("/api/trials", { headers: AUTH_HEADER }).then(r => r.json()),
-          fetch("/api/alerts", { headers: AUTH_HEADER }).then(r => r.json()),
-          fetch("/api/briefs", { headers: AUTH_HEADER }).then(r => r.json())
-        ]);
-
-        const checking = accounts.find(a => a.type === "checking")?.balance || 0;
-        const totalAlloc = budgets.reduce((acc, b) => acc + (b.allocated || 0), 0);
-        const totalSpent = budgets.reduce((acc, b) => acc + (b.spent || 0), 0);
-        const safeWeekly = Math.max(0, (totalAlloc - totalSpent) / 4.0);
-        const budgetPct = totalAlloc > 0 ? Math.round(totalSpent / totalAlloc * 100) : 0;
-        const trialsEnding = trials.filter(t => (t.days_left || 99) <= 3).length;
-
-        container.innerHTML = `
-          <h2 class="page-title">Executive Overview</h2>
+      contentArea.innerHTML = `
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div class="skeleton" style="height:32px;width:240px;"></div>
           <div class="kpi-grid">
-            <div class="kpi-card">
-              <div class="kpi-label">Safe to Spend This Week</div>
-              <div class="kpi-val tnum">$${safeWeekly.toFixed(2)}</div>
-              <div class="kpi-sub">Calculated from remaining monthly budget</div>
-            </div>
-            <div class="kpi-card">
-              <div class="kpi-label">Budget Used (MTD)</div>
-              <div class="kpi-val tnum">${budgetPct}%</div>
-              <div class="kpi-sub">$${totalSpent.toFixed(0)} of $${totalAlloc.toFixed(0)}</div>
-            </div>
-            <div class="kpi-card">
-              <div class="kpi-label">Trials Ending Soon</div>
-              <div class="kpi-val tnum">${trialsEnding}</div>
-              <div class="kpi-sub">${trialsEnding > 0 ? 'Urgent action recommended' : 'All clear'}</div>
-            </div>
-            <div class="kpi-card">
-              <div class="kpi-label">Emergency Reserves</div>
-              <div class="kpi-val tnum">1.4 mos</div>
-              <div class="kpi-sub">Target: 3.0 mos ($9,000)</div>
-            </div>
+            <div class="kpi-card"><div class="skeleton" style="height:60px;"></div></div>
+            <div class="kpi-card"><div class="skeleton" style="height:60px;"></div></div>
+            <div class="kpi-card"><div class="skeleton" style="height:60px;"></div></div>
+            <div class="kpi-card"><div class="skeleton" style="height:60px;"></div></div>
           </div>
+        </div>
+      `;
 
-          <div class="panel-grid">
-            <div class="panel">
-              <div class="panel-header">
-                <span class="panel-title">Active Free Trials & Renewals</span>
-                <button class="btn" onclick="openAssistant('Which of my free trials should I cancel?')">Ask Assistant</button>
-              </div>
-              <div>
-                ${trials.map(t => `
-                  <div class="item-row">
-                    <div>
-                      <strong>${t.service}</strong>
-                      <div style="font-size:0.75rem;color:var(--text-muted);">${t.platform.replace('_', ' ')} • Renews $${t.cost_if_forgotten}</div>
-                    </div>
-                    <div style="text-align:right;">
-                      <span class="badge ${t.days_left <= 2 ? 'badge-danger' : 'badge-amber'}">${t.days_left}d left</span>
-                      <div style="font-size:0.72rem;color:var(--text-muted);margin-top:4px;">Cancel by ${t.cancel_by_date}</div>
-                    </div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel-header">
-                <span class="panel-title">Autopilot Daily Brief</span>
-              </div>
-              <div style="font-size:0.85rem;line-height:1.5;">
-                <p><strong>${briefs[0]?.title || 'Daily Brief'}</strong></p>
-                <p style="color:var(--text-muted);margin:8px 0;">${briefs[0]?.summary || 'Autonomous scan verified all accounts.'}</p>
-                <div style="background:#F0FDF4;padding:10px;border-radius:8px;border:1px solid #BBF7D0;margin-top:10px;">
-                  <strong style="color:var(--emerald);">Market Pulse:</strong>
-                  <div style="font-size:0.78rem;color:#166534;margin-top:4px;">${briefs[0]?.what_it_means_for_you || 'Keep emergency funds in HYSAs to capture 4-5% yield.'}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
-      } else if (page === "learn") {
-        const res = await fetch("/api/learn/lessons", { headers: AUTH_HEADER });
-        const lessons = await res.json();
-        container.innerHTML = `
-          <h2 class="page-title">Personal Finance Knowledge Library (Tax Year 2026)</h2>
-          <div class="lesson-grid">
-            ${lessons.map(l => `
-              <div class="lesson-card" onclick="openAssistant('Explain the lesson: ${l.title}')">
-                <span class="lesson-cat">${l.category}</span>
-                <div class="lesson-title">${l.title}</div>
-                <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:8px;">${l.why_it_matters.substring(0, 85)}...</div>
-                <span style="font-size:0.75rem;font-weight:600;color:var(--emerald);">Study Lesson & Quiz &rarr;</span>
-              </div>
-            `).join('')}
-          </div>
-        `;
-      } else if (page === "game") {
-        const res = await fetch("/api/game/chapters/1", { headers: AUTH_HEADER });
-        const ch = await res.json();
-        container.innerHTML = `
-          <h2 class="page-title">Life Mode: Career & Wealth Simulator</h2>
-          <div class="hud-bar">
-            <div class="hud-stat"><div class="hud-stat-label">Age</div><div class="hud-stat-val">27</div></div>
-            <div class="hud-stat"><div class="hud-stat-label">Net Worth</div><div class="hud-stat-val tnum">$5,770</div></div>
-            <div class="hud-stat"><div class="hud-stat-label">Cash</div><div class="hud-stat-val tnum">$7,190</div></div>
-            <div class="hud-stat"><div class="hud-stat-label">Total Debt</div><div class="hud-stat-val tnum">$19,620</div></div>
-            <div class="hud-stat"><div class="hud-stat-label">Simulated Credit</div><div class="hud-stat-val">718</div></div>
-            <div class="hud-stat"><div class="hud-stat-label">Stress Meter</div><div class="hud-stat-val">Low (25%)</div></div>
-          </div>
-
-          <div class="panel" style="margin-bottom:20px;">
-            <div class="panel-title" style="margin-bottom:8px;">Chapter ${ch.chapter_index}: ${ch.title}</div>
-            <p style="color:var(--text-muted);margin-bottom:16px;">${ch.description}</p>
-            <div style="font-size:0.82rem;font-weight:700;margin-bottom:10px;">Select your financial response:</div>
-            ${ch.choices.map((c, i) => `
-              <div class="choice-card" onclick="alert('${c.feedback}'); openAssistant('In the game, I chose: ${c.text}. What does this teach about finance?')">
-                <strong>Choice ${i+1}:</strong> ${c.text}
-                <div style="font-size:0.75rem;color:var(--emerald);margin-top:6px;">Unlocks Lesson: ${c.lesson_unlocked}</div>
-              </div>
-            `).join('')}
-          </div>
-        `;
-      } else if (page === "settings") {
-        container.innerHTML = `
-          <h2 class="page-title">Settings & Data Portability</h2>
-          <div class="panel" style="max-width:600px;">
-            <div class="panel-title" style="margin-bottom:12px;">Data Portability</div>
-            <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:16px;">Export your complete financial records, accounts, and progress at any time.</p>
-            <div style="display:flex;gap:12px;margin-bottom:28px;">
-              <a href="/api/settings/export?format=json" class="btn btn-primary" download>Export as JSON</a>
-              <a href="/api/settings/export?format=csv" class="btn" download>Export as CSV</a>
-            </div>
-
-            <div class="panel-title" style="color:var(--danger);margin-bottom:8px;">Danger Zone</div>
-            <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:14px;">Permanently wipe your account and all financial subcollections from the database.</p>
-            <button class="btn" style="border-color:var(--danger);color:var(--danger);" onclick="if(confirm('Are you sure you want to permanently delete your account?')) { fetch('/api/settings/delete-account', {method:'DELETE', headers:AUTH_HEADER}).then(() => alert('Account deleted.')).then(() => location.reload()); }">Delete Account and All Data</button>
-          </div>
-        `;
-      } else {
-        container.innerHTML = `
-          <h2 class="page-title">${page.toUpperCase()}</h2>
-          <div class="panel">
-            <p style="color:var(--text-muted);">Data loaded directly from live Firestore subcollections. Use the Futurewise Assistant drawer to analyze this section.</p>
+      try {
+        if (page === 'overview') await renderOverview();
+        else if (page === 'accounts') await renderAccounts();
+        else if (page === 'budget') await renderBudget();
+        else if (page === 'trials') await renderTrials();
+        else if (page === 'debts') await renderDebts();
+        else if (page === 'goals') await renderGoals();
+        else if (page === 'learn') await renderLearn();
+        else if (page === 'game') await renderGame();
+        else if (page === 'autopilot') await renderAutopilot();
+        else if (page === 'settings') await renderSettings();
+      } catch (err) {
+        contentArea.innerHTML = `
+          <div class="empty-state">
+            <h3 style="color:var(--danger)">Failed to load ${escapeHtml(page)}</h3>
+            <p style="margin-bottom:14px;">${escapeHtml(err.message)}</p>
+            <button class="btn btn-primary" onclick="window.location.reload()">Retry</button>
           </div>
         `;
       }
     }
 
-    // Initialize
-    loadPage("overview");
+    // 1. OVERVIEW
+    async function renderOverview() {
+      const data = await api('/api/dashboard/overview');
+      contentArea.innerHTML = `
+        <h2 class="page-title">Executive Overview</h2>
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-label">Safe to Spend This Week</div>
+            <div class="kpi-val tnum">$${data.safe_to_spend_this_week.toFixed(2)}</div>
+            <div class="kpi-sub">Remaining budget / ${data.remaining_weeks} weeks in month</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Budget Used (MTD)</div>
+            <div class="kpi-val tnum">${data.budget_used_percent}%</div>
+            <div class="kpi-sub">$${data.total_spent.toFixed(0)} of $${data.total_allocated.toFixed(0)} allocated</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Trials Ending Soon</div>
+            <div class="kpi-val tnum">${data.trials_ending_count}</div>
+            <div class="kpi-sub">${data.trials_ending_count > 0 ? 'Urgent action recommended' : 'All clear'}</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Emergency Reserves</div>
+            <div class="kpi-val tnum">${data.emergency_months} mos</div>
+            <div class="kpi-sub">$${data.savings_balance.toFixed(0)} savings / essential spend</div>
+          </div>
+        </div>
+
+        <div class="panel-grid">
+          <div class="panel">
+            <div class="panel-header">
+              <span class="panel-title">Active Free Trials & Cancellations</span>
+              <button class="btn" data-action="ask-assistant" data-prompt="Which of my free trials should I cancel?">Ask Assistant</button>
+            </div>
+            <div>
+              ${data.computed_trials.map(t => `
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);">
+                  <div>
+                    <strong>${escapeHtml(t.service)}</strong>
+                    <div style="font-size:0.75rem;color:var(--text-muted);">${escapeHtml(t.platform)} • Renews $${t.price_after_trial} (${t.billing_cycle})</div>
+                    ${t.annual_conversion_warning ? '<span class="badge badge-danger" style="margin-top:4px;">High-Cost Renewal Warning</span>' : ''}
+                  </div>
+                  <div style="text-align:right;">
+                    <span class="badge ${t.days_to_cancel <= 2 ? 'badge-danger' : 'badge-amber'}">${t.days_to_cancel}d to cancel</span>
+                    <div style="font-size:0.72rem;color:var(--text-muted);margin-top:4px;">Deadline: ${t.cancel_by_date}</div>
+                    <button class="btn" style="padding:2px 8px;font-size:0.7rem;margin-top:4px;" data-action="download-ics" data-id="${t.id}">Download .ICS</button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <span class="panel-title">Monthly Budget Tracking</span>
+            </div>
+            <div>
+              ${data.budgets.map(b => `
+                <div style="margin-bottom:14px;">
+                  <div style="display:flex;justify-content:space-between;font-size:0.85rem;margin-bottom:4px;">
+                    <strong>${escapeHtml(b.category)}</strong>
+                    <span class="tnum">$${b.spent.toFixed(2)} / $${b.allocated.toFixed(2)}</span>
+                  </div>
+                  <div class="prog-track">
+                    <div class="prog-fill" style="width:${Math.min(100, b.percent_used)}%;background:${b.percent_used > 90 ? 'var(--danger)' : 'var(--emerald)'};"></div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // 2. ACCOUNTS & NET WORTH
+    async function renderAccounts() {
+      const accounts = await api('/api/accounts');
+      const totalAssets = accounts.filter(a => a.type !== 'credit' && a.type !== 'loan').reduce((acc, a) => acc + (a.balance || 0), 0);
+      const totalLiabilities = accounts.filter(a => a.type === 'credit' || a.type === 'loan').reduce((acc, a) => acc + (a.balance || 0), 0);
+      const netWorth = totalAssets - totalLiabilities;
+
+      contentArea.innerHTML = `
+        <h2 class="page-title">Accounts & Net Worth</h2>
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-label">Total Net Worth</div>
+            <div class="kpi-val tnum">$${netWorth.toFixed(2)}</div>
+            <div class="kpi-sub">Assets minus Liabilities</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Cash & Liquid Assets</div>
+            <div class="kpi-val tnum">$${totalAssets.toFixed(2)}</div>
+            <div class="kpi-sub">Checking & High-Yield Savings</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Total Outstanding Debt</div>
+            <div class="kpi-val tnum">$${totalLiabilities.toFixed(2)}</div>
+            <div class="kpi-sub">Cards & Student Loans</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <span class="panel-title">Connected Financial Accounts</span>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead><tr><th>Account Name</th><th>Type</th><th>Institution</th><th>Balance</th><th>Limit / APY / APR</th></tr></thead>
+              <tbody>
+                ${accounts.map(a => `
+                  <tr>
+                    <td><strong>${escapeHtml(a.name)}</strong></td>
+                    <td><span class="badge badge-emerald">${escapeHtml(a.type)}</span></td>
+                    <td>${escapeHtml(a.institution || '—')}</td>
+                    <td class="tnum"><strong>$${(a.balance || 0).toFixed(2)}</strong></td>
+                    <td class="tnum">${a.limit ? `Limit: $${a.limit}` : (a.apy ? `${a.apy}% APY` : (a.apr ? `${a.apr}% APR` : '—'))}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+
+    // 3. BUDGET & CASH-FLOW
+    async function renderBudget() {
+      const [overview, transactions] = await Promise.all([
+        api('/api/dashboard/overview'),
+        api('/api/transactions')
+      ]);
+
+      contentArea.innerHTML = `
+        <h2 class="page-title">Budget & Cash-flow</h2>
+        <div class="panel">
+          <div class="panel-header">
+            <span class="panel-title">Budget Categories (Current Month Spending)</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
+            ${overview.budgets.map(b => `
+              <div style="background:#F9FAFB;padding:14px;border-radius:10px;border:1px solid var(--border);">
+                <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                  <strong>${escapeHtml(b.category)}</strong>
+                  <span class="tnum"><strong>$${b.spent.toFixed(2)}</strong> / $${b.allocated.toFixed(2)}</span>
+                </div>
+                <div class="prog-track">
+                  <div class="prog-fill" style="width:${Math.min(100, b.percent_used)}%;background:${b.percent_used >= 100 ? 'var(--danger)' : 'var(--emerald)'};"></div>
+                </div>
+                <div style="font-size:0.75rem;color:var(--text-muted);margin-top:6px;">Remaining: $${b.remaining.toFixed(2)} (${b.percent_used}% used)</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <span class="panel-title">Recent Transactions (${transactions.length})</span>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead><tr><th>Date</th><th>Description</th><th>Category</th><th>Account</th><th>Amount</th></tr></thead>
+              <tbody>
+                ${transactions.slice(0, 20).map(t => `
+                  <tr>
+                    <td>${escapeHtml(t.date)}</td>
+                    <td><strong>${escapeHtml(t.description)}</strong></td>
+                    <td><span class="badge ${t.amount < 0 ? 'badge-emerald' : 'badge-amber'}">${escapeHtml(t.category)}</span></td>
+                    <td>${escapeHtml(t.account || 'Checking')}</td>
+                    <td class="tnum" style="color:${t.amount < 0 ? 'var(--emerald)' : 'var(--text)'};font-weight:700;">
+                      ${t.amount < 0 ? `-$${Math.abs(t.amount).toFixed(2)}` : `$${t.amount.toFixed(2)}`}
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+
+    // 4. TRIALS & SUBSCRIPTIONS
+    async function renderTrials() {
+      const [trials, subs] = await Promise.all([
+        api('/api/trials/computed'),
+        api('/api/subscriptions')
+      ]);
+
+      const monthlySubTotal = subs.reduce((acc, s) => acc + (s.amount || 0), 0);
+      const annualSubTotal = monthlySubTotal * 12;
+
+      contentArea.innerHTML = `
+        <h2 class="page-title">Trial Guard & Subscriptions</h2>
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-label">Active Trials</div>
+            <div class="kpi-val tnum">${trials.length}</div>
+            <div class="kpi-sub">Monitored for auto-renewals</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Monthly Subscriptions</div>
+            <div class="kpi-val tnum">$${monthlySubTotal.toFixed(2)}</div>
+            <div class="kpi-sub">$${annualSubTotal.toFixed(2)} per year</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <span class="panel-title">Monitored Free Trials (App Store 2-Day Buffer Enforced)</span>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead><tr><th>Service</th><th>Platform</th><th>Price After Trial</th><th>Days Left</th><th>Recommended Cancel Date</th><th>Action</th></tr></thead>
+              <tbody>
+                ${trials.map(t => `
+                  <tr>
+                    <td><strong>${escapeHtml(t.service)}</strong></td>
+                    <td>${escapeHtml(t.platform)}</td>
+                    <td class="tnum">$${t.price_after_trial} (${escapeHtml(t.billing_cycle)})</td>
+                    <td><span class="badge ${t.days_to_cancel <= 2 ? 'badge-danger' : 'badge-amber'}">${t.days_to_cancel} days</span></td>
+                    <td><strong>${t.cancel_by_date}</strong></td>
+                    <td><button class="btn" data-action="download-ics" data-id="${t.id}">Download .ICS</button></td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+
+    // 5. DEBT PAYOFF PLANNER
+    async function renderDebts() {
+      const schedule = await api('/api/debts/payoff-schedule?extra_monthly=100');
+
+      contentArea.innerHTML = `
+        <h2 class="page-title">Debt Payoff Planner</h2>
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-label">Total Outstanding Debt</div>
+            <div class="kpi-val tnum">$${schedule.total_debt.toFixed(2)}</div>
+            <div class="kpi-sub">Minimum Payments: $${schedule.total_minimum_payments}/mo</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Avalanche Payoff Time</div>
+            <div class="kpi-val tnum">${schedule.avalanche.months_to_debt_free} mos</div>
+            <div class="kpi-sub">Estimated Interest: $${schedule.avalanche.total_interest.toFixed(2)}</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Snowball Payoff Time</div>
+            <div class="kpi-val tnum">${schedule.snowball.months_to_debt_free} mos</div>
+            <div class="kpi-sub">Estimated Interest: $${schedule.snowball.total_interest.toFixed(2)}</div>
+          </div>
+        </div>
+
+        <div class="panel-grid">
+          <div class="panel">
+            <div class="panel-title" style="color:var(--emerald);margin-bottom:8px;">Debt Avalanche (Highest APR First)</div>
+            <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:12px;">Saves the most money mathematically by tackling toxic 24%+ card interest first.</p>
+            <ol style="padding-left:20px;font-size:0.85rem;line-height:1.8;">
+              ${schedule.avalanche.payoff_order.map(name => `<li><strong>${escapeHtml(name)}</strong></li>`).join('')}
+            </ol>
+          </div>
+          <div class="panel">
+            <div class="panel-title" style="color:var(--gold);margin-bottom:8px;">Debt Snowball (Smallest Balance First)</div>
+            <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:12px;">Knocks out small balances rapidly for behavioral dopamine and momentum.</p>
+            <ol style="padding-left:20px;font-size:0.85rem;line-height:1.8;">
+              ${schedule.snowball.payoff_order.map(name => `<li><strong>${escapeHtml(name)}</strong></li>`).join('')}
+            </ol>
+          </div>
+        </div>
+
+        <div class="panel" style="background:#EFF6FF;border-color:#BFDBFE;">
+          <strong>Federal Student Loan Support:</strong>
+          <p style="font-size:0.85rem;color:#1E40AF;margin-top:6px;">
+            Never refinance federal student loans with private commercial lenders without knowing you forfeit income-driven repayment (IDR) and public forgiveness. Check options directly at <a href="https://studentaid.gov" target="_blank" rel="noopener noreferrer" style="color:#1D4ED8;font-weight:700;text-decoration:underline;">studentaid.gov</a>.
+          </p>
+        </div>
+      `;
+    }
+
+    // 6. GOALS & SINKING FUNDS
+    async function renderGoals() {
+      const [goals, funds] = await Promise.all([
+        api('/api/goals'),
+        api('/api/sinking_funds')
+      ]);
+
+      contentArea.innerHTML = `
+        <h2 class="page-title">Goals & Sinking Funds</h2>
+        <div class="panel">
+          <div class="panel-header">
+            <span class="panel-title">Long-Term Wealth Goals</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
+            ${goals.map(g => {
+              const pct = Math.min(100, Math.round((g.current_amount / g.target_amount) * 100));
+              return `
+                <div style="background:#F9FAFB;padding:16px;border-radius:10px;border:1px solid var(--border);">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                    <strong>${escapeHtml(g.title)}</strong>
+                    <span class="tnum">$${g.current_amount} / $${g.target_amount}</span>
+                  </div>
+                  <div class="prog-track">
+                    <div class="prog-fill" style="width:${pct}%;"></div>
+                  </div>
+                  <div style="font-size:0.75rem;color:var(--text-muted);margin-top:6px;">Deadline: ${escapeHtml(g.deadline || 'Ongoing')} (${pct}% funded)</div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <span class="panel-title">Sinking Funds for Irregular Bills</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
+            ${funds.map(f => {
+              const pct = Math.min(100, Math.round((f.current_amount / f.target_amount) * 100));
+              return `
+                <div style="background:#F9FAFB;padding:16px;border-radius:10px;border:1px solid var(--border);">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                    <strong>${escapeHtml(f.name)}</strong>
+                    <span class="tnum">$${f.current_amount} / $${f.target_amount}</span>
+                  </div>
+                  <div class="prog-track">
+                    <div class="prog-fill" style="width:${pct}%;background:var(--gold);"></div>
+                  </div>
+                  <div style="font-size:0.75rem;color:var(--text-muted);margin-top:6px;">Target Date: ${escapeHtml(f.target_date)} (${pct}% funded)</div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // 7. LEARN LIBRARY (Milestone 4: Lessons + Quizzes)
+    async function renderLearn() {
+      const lessons = await api('/api/learn/lessons');
+      contentArea.innerHTML = `
+        <h2 class="page-title">Personal Finance Knowledge Library (Tax Year 2026)</h2>
+        <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:16px;">
+          ${lessons.map(l => `
+            <div class="panel" style="cursor:pointer;" onclick="document.getElementById('lesson-detail-${l.id}').style.display='block';">
+              <span class="badge badge-emerald" style="margin-bottom:8px;">${escapeHtml(l.category)}</span>
+              <h3 style="font-size:0.98rem;color:var(--navy);margin-bottom:8px;">${escapeHtml(l.title)}</h3>
+              <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:12px;">${escapeHtml(l.why_it_matters.substring(0, 95))}...</p>
+              <button class="btn btn-primary" style="padding:4px 10px;font-size:0.75rem;">Open Lesson & Quiz &rarr;</button>
+
+              <!-- Inline Modal -->
+              <div id="lesson-detail-${l.id}" class="modal-overlay" style="display:none;" onclick="if(event.target===this)this.style.display='none';">
+                <div class="modal-card" style="max-width:560px;max-height:85vh;overflow-y:auto;" onclick="event.stopPropagation();">
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                    <span class="badge badge-emerald">${escapeHtml(l.category)} (2026)</span>
+                    <button class="btn" onclick="document.getElementById('lesson-detail-${l.id}').style.display='none';">&times;</button>
+                  </div>
+                  <h2 style="font-size:1.25rem;color:var(--navy);margin-bottom:12px;">${escapeHtml(l.title)}</h2>
+                  <div style="font-size:0.88rem;line-height:1.6;margin-bottom:16px;">
+                    <p style="margin-bottom:10px;"><strong>Why it Matters:</strong> ${escapeHtml(l.why_it_matters)}</p>
+                    <p style="margin-bottom:10px;color:var(--danger);"><strong>Common Mistake:</strong> ${escapeHtml(l.common_mistake)}</p>
+                    <p style="margin-bottom:16px;color:var(--emerald);"><strong>What to Do Next:</strong> ${escapeHtml(l.what_to_do_next)}</p>
+                  </div>
+
+                  <h3 style="font-size:1rem;color:var(--navy);border-top:1px solid var(--border);padding-top:12px;margin-bottom:10px;">Mastery Quiz (3 Questions)</h3>
+                  ${l.quiz.map((q, qi) => `
+                    <div style="margin-bottom:14px;font-size:0.85rem;">
+                      <p style="font-weight:600;margin-bottom:6px;">${qi + 1}. ${escapeHtml(q.q)}</p>
+                      ${q.options.map((opt, oi) => `
+                        <label style="display:block;margin-bottom:4px;cursor:pointer;">
+                          <input type="radio" name="q_${l.id}_${qi}" class="quiz-option-${l.id}" value="${oi}" /> ${escapeHtml(opt)}
+                        </label>
+                      `).join('')}
+                    </div>
+                  `).join('')}
+                  <button class="btn btn-emerald" style="width:100%;justify-content:center;margin-top:10px;" data-action="submit-quiz" data-lesson-id="${l.id}">Submit Quiz Answers</button>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    // 8. LIFE MODE GAME (Milestone 5: Server-Side State + Rewind + Report)
+    async function renderGame() {
+      const data = await api('/api/game/current');
+      const state = data.game_state;
+      const ch = data.current_chapter;
+
+      contentArea.innerHTML = `
+        <h2 class="page-title">Life Mode: Career & Wealth Simulator</h2>
+        <div style="background:var(--navy);color:#fff;border-radius:var(--radius);padding:16px 20px;display:flex;justify-content:space-around;margin-bottom:20px;">
+          <div style="text-align:center;"><div style="font-size:0.72rem;color:rgba(255,255,255,0.6);">Age</div><div class="tnum" style="font-size:1.3rem;font-weight:700;">${state.stats.age}</div></div>
+          <div style="text-align:center;"><div style="font-size:0.72rem;color:rgba(255,255,255,0.6);">Net Worth</div><div class="tnum" style="font-size:1.3rem;font-weight:700;">$${state.stats.net_worth.toFixed(0)}</div></div>
+          <div style="text-align:center;"><div style="font-size:0.72rem;color:rgba(255,255,255,0.6);">Cash Reserves</div><div class="tnum" style="font-size:1.3rem;font-weight:700;">$${state.stats.cash.toFixed(0)}</div></div>
+          <div style="text-align:center;"><div style="font-size:0.72rem;color:rgba(255,255,255,0.6);">Total Debt</div><div class="tnum" style="font-size:1.3rem;font-weight:700;">$${state.stats.debt.toFixed(0)}</div></div>
+          <div style="text-align:center;"><div style="font-size:0.72rem;color:rgba(255,255,255,0.6);">Simulated Credit</div><div style="font-size:1.3rem;font-weight:700;">${state.stats.credit_score}</div></div>
+          <div style="text-align:center;"><div style="font-size:0.72rem;color:rgba(255,255,255,0.6);">Stress Meter</div><div style="font-size:1.3rem;font-weight:700;">${state.stats.stress}%</div></div>
+        </div>
+
+        ${!state.is_finished && ch ? `
+          <div class="panel">
+            <div class="panel-title" style="margin-bottom:8px;">Chapter ${ch.chapter_index}: ${escapeHtml(ch.title)}</div>
+            <p style="color:var(--text-muted);margin-bottom:16px;line-height:1.5;">${escapeHtml(ch.description)}</p>
+            <div style="font-size:0.85rem;font-weight:700;margin-bottom:10px;">Select your financial choice:</div>
+            ${ch.choices.map(c => `
+              <div style="background:#fff;border:2px solid var(--border);border-radius:12px;padding:16px;cursor:pointer;margin-bottom:12px;" data-action="make-choice" data-choice-id="${c.id}">
+                <strong>${escapeHtml(c.text)}</strong>
+                <div style="font-size:0.75rem;color:var(--emerald);margin-top:6px;">Unlocks: ${escapeHtml(c.lesson_title)}</div>
+              </div>
+            `).join('')}
+          </div>
+        ` : `
+          <div class="panel" style="text-align:center;padding:32px;">
+            <h3 style="font-size:1.4rem;color:var(--navy);margin-bottom:12px;">Simulation Complete!</h3>
+            <p style="color:var(--text-muted);margin-bottom:20px;">You reached age ${state.stats.age} with a net worth of $${state.stats.net_worth.toFixed(2)}.</p>
+            <div style="display:flex;justify-content:center;gap:12px;">
+              <button class="btn btn-primary" data-action="start-game" data-diff="Normal">Start New Run</button>
+            </div>
+          </div>
+        `}
+
+        <!-- Rewind Timeline -->
+        ${state.history.length > 0 ? `
+          <div class="panel">
+            <div class="panel-header">
+              <span class="panel-title">Decision History & Timeline Rewind</span>
+            </div>
+            ${state.history.map(h => `
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);">
+                <div>
+                  <strong>Chapter ${h.chapter_index}: ${escapeHtml(h.chapter_title)}</strong>
+                  <div style="font-size:0.78rem;color:var(--text-muted);">${escapeHtml(h.choice_text)}</div>
+                </div>
+                <button class="btn" data-action="rewind-game" data-target-chapter="${h.chapter_index}">Rewind Here</button>
+              </div>
+            `).join('')}
+          </div>
+        ` : ''}
+      `;
+    }
+
+    // 9. AUTOPILOT FEED
+    async function renderAutopilot() {
+      const [alerts, briefs] = await Promise.all([
+        api('/api/alerts'),
+        api('/api/briefs')
+      ]);
+
+      contentArea.innerHTML = `
+        <h2 class="page-title">Autopilot Feed & Daily Briefs</h2>
+        <div class="panel-grid">
+          <div class="panel">
+            <div class="panel-header">
+              <span class="panel-title">Active Alerts & Warnings (${alerts.length})</span>
+              <button class="btn btn-emerald" id="btn-run-feed-autopilot">Run Autopilot Scan Now</button>
+            </div>
+            <div>
+              ${alerts.map(a => `
+                <div style="padding:12px 0;border-bottom:1px solid var(--border);">
+                  <div style="display:flex;justify-content:space-between;">
+                    <strong>${escapeHtml(a.title)}</strong>
+                    <span class="badge ${a.severity === 'high' ? 'badge-danger' : 'badge-amber'}">${escapeHtml(a.severity || 'info')}</span>
+                  </div>
+                  <p style="font-size:0.82rem;color:var(--text-muted);margin-top:4px;">${escapeHtml(a.message)}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <span class="panel-title">Daily Money Briefs</span>
+            </div>
+            <div>
+              ${briefs.map(b => `
+                <div style="padding:12px 0;border-bottom:1px solid var(--border);">
+                  <strong>${escapeHtml(b.title)}</strong>
+                  <p style="font-size:0.82rem;color:var(--text-muted);margin:6px 0;">${escapeHtml(b.summary)}</p>
+                  <div style="background:#F0FDF4;padding:8px;border-radius:6px;font-size:0.75rem;color:#166534;">
+                    <strong>Market Pulse:</strong> ${escapeHtml(b.what_it_means_for_you || 'Keep reserves in HYSAs.')}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('btn-run-feed-autopilot').onclick = async () => {
+        try {
+          showToast('Scanning accounts and trials...', 'info');
+          await api('/api/autopilot/run-now', { method: 'POST' });
+          showToast('Autopilot scan finished!', 'success');
+          renderAutopilot();
+        } catch (err) {
+          showToast(err.message, 'error');
+        }
+      };
+    }
+
+    // 10. SETTINGS & EXPORT (Milestone 2: Fetch Blob Download)
+    async function renderSettings() {
+      contentArea.innerHTML = `
+        <h2 class="page-title">Settings & Data Portability</h2>
+        <div class="panel" style="max-width:580px;">
+          <div class="panel-title" style="margin-bottom:8px;">Export User Financial Data</div>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:16px;">
+            Export all subcollections (accounts, transactions, budgets, trials, and goals) securely using authenticated token downloads.
+          </p>
+          <div style="display:flex;gap:12px;margin-bottom:28px;">
+            <button class="btn btn-primary" data-action="export-json">Export as JSON</button>
+            <button class="btn" data-action="export-csv">Export as CSV</button>
+          </div>
+
+          <div class="panel-title" style="color:var(--danger);margin-bottom:8px;">Danger Zone</div>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:14px;">
+            Permanently delete your account and all financial records. This action cannot be undone.
+          </p>
+          <button class="btn btn-danger" data-action="delete-account">Delete Account and All Data</button>
+        </div>
+      `;
+    }
+
+    // Initial Route Resolution
+    const initPage = window.location.hash.replace('#', '') || 'overview';
+    navigateTo(initPage, false);
   </script>
 </body>
 </html>
