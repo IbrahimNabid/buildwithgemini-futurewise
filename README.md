@@ -1,7 +1,7 @@
-# Futurewise v2: Autonomous Wealth & Financial Decision System
+# Futurewise
 > *"Learn it. Track it. Play it forward."*
 
-Futurewise v2 is a full-stack, multi-agent, autonomous personal finance platform engineered to help everyday people—especially those without a background in finance—make sound, mathematically optimal money decisions. Futurewise delivers a bank-grade fintech dashboard where the AI assistant acts as a knowledgeable, context-aware co-pilot rather than the sole interface.
+Futurewise is a full-stack, multi-agent, autonomous personal finance platform engineered to help everyday people—especially those without a background in finance—make sound, mathematically optimal money decisions. Futurewise delivers a bank-grade fintech dashboard where the AI assistant acts as a knowledgeable, context-aware co-pilot rather than the sole interface.
 
 ---
 
